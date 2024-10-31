@@ -1,8 +1,25 @@
 # IT-Project_22110036_22110040
 
 
-## Quy tắc css selector cho HEADER, FOOTER, CONTENT
-- Ý nghĩa: hạn chế trường hợp trùng tên class, id, gây xung đột css
-- thành phần của header phải selector bằng "#header ..."
-    - Ví dụ 1 thành phần trong header, có id là logo, css selector của thành phần đó sẽ là "#header #logo{...}"
-    - Tương tự, thành phần trong content thì "#content ...", thành phần trong footer thì "#footer ..."
+## Code các trang, các bước thực hiện
+
+1. Chọn tên gọi phù hợp cho trang, ví dụ trang chủ là homepage
+2. Tạo file html, css vào folder chứa ảnh cho trang đó
+    - tên trang là "homepage" thì các file là 
+        + "homepage.html" 
+        + "homepage.css"
+        + folder chứa ảnh là "homepage", đặt trong folder images
+    - các file html đặt ở cấp ngoài cùng
+    - các file css đặt trong folder css
+    - hình ảnh của trang nào đặt trong folder chứa ảnh của trang đó
+3. Code xong, có thử trang đó với file layout.html. Trong file layout.html
+    - Copy code của trang đó vào phần content
+    - Copy thẻ link file css của trang đó vào.  
+    - Chạy thử
+
+
+
+## Dự kiến
+- Sau khi chuyển code được hầu hết các form chính 
+=> code chức năng
+- Công nghệ sử dụng: Áp dụng toàn bộ theo kiến thức đã học của môn web thầy Khoa 
