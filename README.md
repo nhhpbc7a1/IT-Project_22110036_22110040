@@ -21,9 +21,10 @@
 
 ## Tên nhánh:
 ```
- <tên mình>/<tên trang/task>
+ <tên mình>/page_<tên trang>
 ```
-vd: huy-layout  
+vd: huy/page_layout  
+
 
 ## Dự kiến
 - Sau khi chuyển code được hầu hết các form chính 
