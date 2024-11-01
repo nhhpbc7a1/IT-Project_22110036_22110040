@@ -19,6 +19,12 @@
 
 
 
+## Tên nhánh:
+```
+ <tên mình>/<tên trang/task>
+```
+vd: huy-layout  
+
 ## Dự kiến
 - Sau khi chuyển code được hầu hết các form chính 
 => code chức năng
