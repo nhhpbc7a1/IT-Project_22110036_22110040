@@ -1,0 +1,123 @@
+{{#section 'css'}}
+<link rel="stylesheet" href="/public/css/product_detail.css">
+{{/section}}
+
+{{#section 'js'}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#btnMinus').click(function () {
+            var count = parseInt($('#txtCount').val());
+            if (count > 1)
+                $('#txtCount').val(--count);
+        })
+
+        $('#btnPlus').click(function () {
+            var count = parseInt($('#txtCount').val());
+            $('#txtCount').val(++count);
+        })
+
+    });
+</script>
+{{/section}}
+
+
+<div class="container">
+    <div class="row mt-3">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb" style="background-color: transparent; font-size: 20px;">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item"><a href="#">Fruit</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Da Lat Strawberry</li>
+            </ol>
+        </nav>
+    </div>
+    <div class="row">
+        <div class="detail_block">
+            <div class="detail_block_img col-4">
+                <img src="/public/images/product.png" alt="">
+                <i class="bi bi-heart"></i>
+            </div>
+            <div class="detail_block_content col-8">
+                <h2 class="name">Da Lat Strawberry</h2>
+                <div class="price_block">
+                    <span class="price">150.000</span>
+                    <span class="old_price">120.000</span>
+                </div>
+                <div class="info_block">
+                    <p>Stock</p>
+                    <div class="info_block_value stock_status">available</div>
+                </div>
+                <div class="info_block">
+                    <div class="abstract">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia expedita adipisci soluta sint,
+                        in nisi deleniti, reiciendis fugit laudantium deserunt distinctio voluptatem labore eos nesciunt
+                        ratione alias earum id fuga.
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-6">
+                        <div class="info_block">
+                            <p>Catergory</p>
+                            <div class="info_block_value ">Fruit</div>
+                        </div>
+                        <div class="info_block">
+                            <p>Origin</p>
+                            <div class="info_block_value ">Da Lat</div>
+                        </div>
+
+                        <div class="info_block">
+                            <p>Origin</p>
+                            <div class="info_block_value quantity_block d-flex">
+                                <button id="btnMinus">
+                                    <i class="bi bi-dash"></i>
+                                </button>
+                                <input id="txtCount" type="text" value="1" readonly>
+                                <button id="btnPlus">
+                                    <i class="bi bi-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="action_block">
+                            <button class="add_to_cart">Add to cart</button>
+                            <button class="buy_now ml-3">Buy now</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="shop_block">
+            <img src="/public/images/product.png" alt="">
+            <div class="">
+                <div class="shop_name">Lavender</div>
+                <button class="shop_go">View shop</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="long_descript">
+            <h2>Long Description</h2>
+            <p class="col-9">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores consequuntur cum delectus earum
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repudiandae, saepe dolore nesciunt explicabo
+                quibusdam id sunt obcaecati dolores odit illum expedita! Earum numquam, quo ipsum architecto modi odio
+                at ea.
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error esse adipisci alias quam, pariatur,
+                sunt, aperiam aliquid aliquam nam magni aut et. Dolores qui beatae, officiis iste porro maxime vero!
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores consequuntur cum delectus earum
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repudiandae, saepe dolore nesciunt explicabo
+                quibusdam id sunt obcaecati dolores odit illum expedita! Earum numquam, quo ipsum architecto modi odio
+                at ea.
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error esse adipisci alias quam, pariatur,
+                sunt, aperiam aliquid aliquam nam magni aut et. Dolores qui beatae, officiis iste porro maxime vero!
+            </p>
+        </div>
+    </div>
+</div>

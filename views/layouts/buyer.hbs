@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+        integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <title>Healthy Heaven</title>
+
+    {{{_sections.css}}}
+    <link rel="stylesheet" href="/public/css/global.css">
+</head>
+
+<body>
+    <div id="header">
+        <div class="container">
+            <div class="header__links">
+                <a class="can-hover" href="">Seller page</a>
+                <a class="can-hover" href="">Sign in</a>
+            </div>
+            <div class="header__navbar">
+                <a class="header__navbar-item " href="">
+                    <img src="/public/images/logo.png" alt="">
+                </a>
+                <div class="header__navbar-item header__search-bar">
+                    <input id="txtSearchText" type="text" placeholder="Input product name ...">
+                    <button class="can-hover">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                </div>
+                <div class="header__navbar-item header__cart can-hover">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="content">
+        {{{body}}}
+    </div>
+
+    <div id="footer">
+        <div class="container">
+            <div class="row">
+                <a href="" class="col-3">
+                    <img src="/public/images/logo.png" alt="">
+                </a>
+                <div class="col-9">
+                    <div class="footer__title-list row">
+                        <div class="col">About us</div>
+                        <div class="col">Policy</div>
+                        <div class="col">Contact</div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <ul>
+                                <li>
+                                    <a href="">Introduction about the store</a>
+                                </li>
+                                <li>
+                                    <a href="">F&Q</a>
+                                </li>
+                                <li>
+                                    <a href="">Our story</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col">
+                            <ul>
+                                <li>
+                                    <a href="">Delivery Policy</a>
+                                </li>
+                                <li>
+                                    <a href="">Payment Policy</a>
+                                </li>
+                                <li>
+                                    <a href="">Member Policy</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col">
+                            <ul>
+                                <li class="">
+                                    Address:
+                                    <p id="txtAddress"> 5/3 112 Phước Long A, Quận 9</p>
+                                </li>
+                                <li>
+                                    Hotline:
+                                    <p id="txtPhone"> 0112356789</p>
+                                </li>
+                                <li class="links-box">
+                                    Website:
+                                    <p id="txtPhone"> healthyheaven.com</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row d-flex justify-content-center">
+                <p>© 2024 Healthy Heaven</p>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+
+    {{{_sections.js}}}
+</body>
+
+</html>

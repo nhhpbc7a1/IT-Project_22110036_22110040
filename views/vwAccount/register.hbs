@@ -1,0 +1,83 @@
+{{#section 'css'}}
+<link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css">
+<link rel="stylesheet" href="/public/css/register.css">
+{{/section}}
+
+{{#section 'js'}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script
+    src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#txtBirthday').datetimepicker({
+            timepicker: false,
+            format: 'd/m/Y',
+            mask: true
+        });
+
+        $('#frmRegister').on('submit', function (e) {
+            e.preventDefault();
+            const UserName = $('#txtUsername').val();
+            if (UserName.length === 0) {
+                alert('UserName is required');
+                return;
+            }
+
+            $.getJSON('account/is-available?username=' + UserName, function (data) {
+                if (data) {
+                    alert('Username is available');
+                } else {
+                    $('#frmRegister').off('submit').submit();  // Corrected selector syntax
+                }
+            });
+        });
+    });
+</script>
+{{/section}}
+
+<div class="container">
+    <div class="row d-flex justify-content-center">
+        <form id="frmRegister" action="" method="post" class="col-5">
+            <div class="my_registration">
+                <div class="my_registration_header">
+                    Registration
+                </div>
+                <div class="my_registration_body">
+                    <div class="form-group">
+                        <input type="text" name="" id="" class="form-control" placeholder="Username">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="" id="" class="form-control" placeholder="Birthday">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="" id="" class="form-control" placeholder="Phone number">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="" id="" class="form-control" placeholder="Address">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" name="" id="" class="form-control" placeholder="Password">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" name="" id="" class="form-control" placeholder="Re-type password">
+                    </div>
+                    <div class="form-group check_agree">
+                        <label class="custom_checkbox_container">
+                            <input type="checkbox">
+                            <span class="checkmark"></span>
+                        </label>
+                        Agree with <a href="">Term & Condition</a>
+                    </div>
+
+                </div>
+                <div class="my_registration_footer text-muted">
+                    <button type="submit" class="btn btn-primary">
+                        Submit
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+    
+</div>
