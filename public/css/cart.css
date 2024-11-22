@@ -1,0 +1,61 @@
+.quantity_block button{
+    border: 1px solid #ccc;
+    padding: 2px 8px;
+    line-height: 40px;
+}
+
+.quantity_block input {
+    width: 45px;
+    text-align: center;
+    line-height: 40px;
+}
+
+.my_table thead{
+    background-color: var(--primary-color--light);
+    color: var(--primary-color--medium);
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.my_table {
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.my_table .product_delete {
+    color: red;
+    border: none;
+    font-size: 40px;
+    background-color: transparent;
+}
+
+.my_table tr td{
+    /* line-height: 100px; */
+}
+
+.total_block {
+    display: flex;
+    font-size: 20px;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+.total_block_item {
+    display: flex;
+    padding: 12px 24px;
+    border: 1px solid black;
+}
+
+.total_block_item span,
+button.total_block_item{
+    font-weight: 500;
+    margin-left: 12px;
+}
+
+button.total_block_item {
+    background-color: var(--primary-color--medium);
+    color: white;
+    border: none;
+    padding: 12px 42px;
+    border-radius: 12px;
+}

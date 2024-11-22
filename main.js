@@ -42,6 +42,12 @@ app.use('/product', productRouter);
 import accountRouter from './routes/account.route.js';
 app.use('/account', accountRouter);
 
+import cartRouter from './routes/cart.route.js';
+app.use('/cart', cartRouter);
+
+import checkoutRouter from './routes/checkout.route.js';
+app.use('/checkout', checkoutRouter);
+
 
 app.listen(3000, function() {
     console.log('app is running at http://localhost:3000');

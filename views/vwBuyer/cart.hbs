@@ -1,0 +1,281 @@
+{{#section 'css'}}
+<link rel="stylesheet" href="/public/css/cart.css">
+{{/section}}
+
+{{#section 'js'}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#btnMinus').click(function () {
+            var count = parseInt($('#txtCount').val());
+            if (count > 1)
+                $('#txtCount').val(--count);
+        })
+
+        $('#btnPlus').click(function () {
+            var count = parseInt($('#txtCount').val());
+            $('#txtCount').val(++count);
+        })
+
+    });
+</script>
+{{/section}}
+
+
+
+<div class="container">
+    <div class="row mt-3">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb" style="background-color: transparent; font-size: 20px;">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Cart</li>
+            </ol>
+        </nav>
+    </div>
+    <div class="row">
+        <table class="my_table table">
+            <thead>
+                <tr>
+                    <th><input type="checkbox"></th>
+                    <th width="100px">Product</th>
+                    <th> &nbsp;</th>
+                    <th>Type</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td scope="row"><input type="checkbox"></td>
+                    <td>
+                        <img src="/public/images/product.png" alt="">
+                    </td>
+                    <td>
+                        <div class="product_name">Dau Da Lat</div>
+                    </td>
+                    <td>
+                        Fruit
+                    </td>
+                    <td>
+                        <div class="d-flex align-items-center">
+                            <div class="quantity_block d-flex">
+                                <button id="btnMinus">
+                                    <i class="bi bi-dash"></i>
+                                </button>
+                                <input id="txtCount" type="text" value="1" readonly>
+                                <button id="btnPlus">
+                                    <i class="bi bi-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="product_price">
+                            150.000đ
+                        </div>
+                    </td>
+                    <td>
+                        <button class="product_delete can-hover">
+                            <i class="bi bi-x"></i>
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td scope="row"><input type="checkbox"></td>
+                    <td>
+                        <img src="/public/images/product.png" alt="">
+                    </td>
+                    <td>
+                        <div class="product_name">Dau Da Lat</div>
+                    </td>
+                    <td>
+                        Fruit
+                    </td>
+                    <td>
+                        <div class="d-flex align-items-center">
+                            <div class="quantity_block d-flex">
+                                <button id="btnMinus">
+                                    <i class="bi bi-dash"></i>
+                                </button>
+                                <input id="txtCount" type="text" value="1" readonly>
+                                <button id="btnPlus">
+                                    <i class="bi bi-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="product_price">
+                            150.000đ
+                        </div>
+                    </td>
+                    <td>
+                        <button class="product_delete can-hover">
+                            <i class="bi bi-x"></i>
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td scope="row"><input type="checkbox"></td>
+                    <td>
+                        <img src="/public/images/product.png" alt="">
+                    </td>
+                    <td>
+                        <div class="product_name">Dau Da Lat</div>
+                    </td>
+                    <td>
+                        Fruit
+                    </td>
+                    <td>
+                        <div class="d-flex align-items-center">
+                            <div class="quantity_block d-flex">
+                                <button id="btnMinus">
+                                    <i class="bi bi-dash"></i>
+                                </button>
+                                <input id="txtCount" type="text" value="1" readonly>
+                                <button id="btnPlus">
+                                    <i class="bi bi-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="product_price">
+                            150.000đ
+                        </div>
+                    </td>
+                    <td>
+                        <button class="product_delete can-hover">
+                            <i class="bi bi-x"></i>
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td scope="row"><input type="checkbox"></td>
+                    <td>
+                        <img src="/public/images/product.png" alt="">
+                    </td>
+                    <td>
+                        <div class="product_name">Dau Da Lat</div>
+                    </td>
+                    <td>
+                        Fruit
+                    </td>
+                    <td>
+                        <div class="d-flex align-items-center">
+                            <div class="quantity_block d-flex">
+                                <button id="btnMinus">
+                                    <i class="bi bi-dash"></i>
+                                </button>
+                                <input id="txtCount" type="text" value="1" readonly>
+                                <button id="btnPlus">
+                                    <i class="bi bi-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="product_price">
+                            150.000đ
+                        </div>
+                    </td>
+                    <td>
+                        <button class="product_delete can-hover">
+                            <i class="bi bi-x"></i>
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td scope="row"><input type="checkbox"></td>
+                    <td>
+                        <img src="/public/images/product.png" alt="">
+                    </td>
+                    <td>
+                        <div class="product_name">Dau Da Lat</div>
+                    </td>
+                    <td>
+                        Fruit
+                    </td>
+                    <td>
+                        <div class="d-flex align-items-center">
+                            <div class="quantity_block d-flex">
+                                <button id="btnMinus">
+                                    <i class="bi bi-dash"></i>
+                                </button>
+                                <input id="txtCount" type="text" value="1" readonly>
+                                <button id="btnPlus">
+                                    <i class="bi bi-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="product_price">
+                            150.000đ
+                        </div>
+                    </td>
+                    <td>
+                        <button class="product_delete can-hover">
+                            <i class="bi bi-x"></i>
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td scope="row"><input type="checkbox"></td>
+                    <td>
+                        <img src="/public/images/product.png" alt="">
+                    </td>
+                    <td>
+                        <div class="product_name">Dau Da Lat</div>
+                    </td>
+                    <td>
+                        Fruit
+                    </td>
+                    <td>
+                        <div class="d-flex align-items-center">
+                            <div class="quantity_block d-flex">
+                                <button id="btnMinus">
+                                    <i class="bi bi-dash"></i>
+                                </button>
+                                <input id="txtCount" type="text" value="1" readonly>
+                                <button id="btnPlus">
+                                    <i class="bi bi-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="product_price">
+                            150.000đ
+                        </div>
+                    </td>
+                    <td>
+                        <button class="product_delete can-hover">
+                            <i class="bi bi-x"></i>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="row">
+        <div class="total_block">
+            <div class="left d-flex">
+                <div class="total_block_item">
+                    <div>Total items </div>
+                    <span>2</span>
+                </div>
+                <div class="total_block_item ml-3">
+                    <div>Total price</div>
+                    <span style="color: red;">300.000đ</span>
+                </div>
+            </div>
+            <div class="right">
+                <button class="total_block_item can-hover">
+                    Checkout
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

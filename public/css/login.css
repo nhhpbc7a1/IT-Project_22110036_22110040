@@ -1,0 +1,54 @@
+.my_login {
+    width: 100%;
+    margin-top: 32px;
+    margin-bottom: 160px;
+    border: 1px solid #ccc;
+    padding: 24px;
+    border-radius: 12px;
+    box-shadow: var(--box-shadow);
+    background-color: var(--primary-color--light);
+}
+
+.my_login_header {
+    font-size: 32px;
+    color: var(--primary-color--heavy);
+    font-weight: 600;
+    text-align: center;
+}
+
+.my_login_body {
+    margin-top: 24px;
+}
+
+.my_login_body .form-control {
+    border: none;
+    border-bottom: 1px solid var(--primary-color--heavy);
+    font-size: 20px;
+    border-radius: 0px;
+    background-color: transparent;
+    color: var(--primary-color--heavy);
+}
+
+.my_login_body input::placeholder {
+    color: var(--primary-color--heavy);
+}
+
+.my_login_footer button{
+    width: 100%;
+    text-align: center;
+    background-color: var(--primary-color--heavy);
+    font-size: 24px;
+    font-weight: 600;
+    color: white;
+    margin: 24px 0;
+}
+
+.my_login_footer p {
+    margin-top: 24px;
+    text-align: center;
+    font-size: 20px;
+}
+
+.my_login_footer a {
+    color: var(--primary-color--medium);
+}
