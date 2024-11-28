@@ -6,10 +6,10 @@
     --text-color: #ffffff;
     --white-color: #ffffff;
     --black-color: #000000;
-    --max-width: 1150px;
+    --max-width: 1000px;
     --border-radius: 4px;
-    --font-size--m: 20px;
-    --font-size--l: 26px;
+    --font-size--m: 16px;
+    --font-size--l: 20px;
     --separate-far: 15px;
     --border: 1px solid black;
     --box-shadow:  rgba(0, 0, 0, 0.24) 0px 3px 8px;
@@ -37,6 +37,9 @@
 }
 
 .header__links {
+    position: absolute;
+    top: 0;
+    right: 0;
     display: flex;
     justify-content: end;
 }
@@ -52,10 +55,11 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding-top: 20px;
 }
 
 .header__navbar img {
-    width: 150px;
+    width: 130px;
     height: auto;
 }
 
