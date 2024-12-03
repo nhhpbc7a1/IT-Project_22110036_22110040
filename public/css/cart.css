@@ -15,11 +15,15 @@
     color: var(--primary-color--medium);
     font-size: 20px;
     font-weight: 500;
+    height: 50px;
 }
-
+.setDistanceForCb{
+    padding-left: 10px;
+}
 .my_table {
     font-size: 20px;
-    font-weight: 500;
+    font-weight: 400;
+    width: 100%;
 }
 
 .my_table .product_delete {
@@ -29,26 +33,36 @@
     background-color: transparent;
 }
 
-.my_table tr td{
-    /* line-height: 100px; */
+.my_table tbody tr{
+    border-bottom: 1px solid rgb(75, 73, 73);
+    height: 200px;  
 }
+.product_name{
+    width: 150px;
+    text-align: left;
 
+}
+.my_table td, th{
+    align-items: center;
+    text-align: center;
+}
 .total_block {
     display: flex;
     font-size: 20px;
-    justify-content: flex-end;
+    justify-content: space-between;
     width: 100%;
 }
 
 .total_block_item {
     display: flex;
-    padding: 12px 24px;
-    border: 1px solid black;
-}
+    padding: 18px 60px;
+    border: 1px solid rgb(136, 133, 133);
+    border-radius: 3px;
+    font-weight: 500;
 
+}
 .total_block_item span,
 button.total_block_item{
-    font-weight: 500;
     margin-left: 12px;
 }
 
@@ -56,6 +70,43 @@ button.total_block_item {
     background-color: var(--primary-color--medium);
     color: white;
     border: none;
-    padding: 12px 42px;
-    border-radius: 12px;
+    padding: 18px 60px;
+    border-radius: 5px;
+    font-weight: 500;
+
 }
+.quantity_block{
+    position: relative;
+    width: 120px;
+    margin-left: 15px;
+}
+.quantity_block .btn{
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    border-radius: 100%;
+}
+.quantity_block .btn.Minus{
+    left: 0;
+    background-color: rgb(115,220,243);
+
+}
+.quantity_block .btn.Plus{
+    right: 0;
+    background-color: rgb(115,220,243);
+}
+.quantity_block .txtCount{
+    background-color: rgb(226,248,224);
+    border-style: none;
+    width: 100%;
+    border-radius: 30px;
+    height: 28px;
+
+}
+.iconAction{
+    width: 80%;
+}
+input[type="checkbox"] {
+    transform: scale(1.5); /* Tăng kích thước */
+    margin: 5px; /* Đảm bảo khoảng cách không bị ảnh hưởng */
+  }

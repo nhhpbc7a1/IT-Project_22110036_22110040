@@ -28,25 +28,27 @@
             <ol class="breadcrumb" style="background-color: transparent; font-size: 20px;">
                 <li class="breadcrumb-item"><a href="#">Home</a></li>
                 <li class="breadcrumb-item"><a href="#">Fruit</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Da Lat Strawberry</li>
+                <li class="breadcrumb-item active" aria-current="page" style="color: rgb(46, 45, 45);">Da Lat Strawberry</li>
             </ol>
         </nav>
     </div>
     <div class="row">
         <div class="detail_block">
             <div class="detail_block_img col-4">
-                <img src="/public/images/product.png" alt="">
+                <img src="/public/images/fruits/camUc139.png" alt="">
                 <i class="bi bi-heart"></i>
             </div>
             <div class="detail_block_content col-8">
-                <h2 class="name">Da Lat Strawberry</h2>
+                <h3 class="name">Da Lat Strawberry</h3>
                 <div class="price_block">
-                    <span class="price">150.000</span>
-                    <span class="old_price">120.000</span>
+                    <span class="price">150.000 đ</span>
+                    <span class="old_price">120.000 đ</span>
                 </div>
                 <div class="info_block">
                     <p>Stock</p>
-                    <div class="info_block_value stock_status">available</div>
+                    <div class="info_block_value stock_status">
+                        <i class="bi bi-check"></i>
+                        available</div>
                 </div>
                 <div class="info_block">
                     <div class="abstract">
@@ -68,8 +70,8 @@
                         </div>
 
                         <div class="info_block">
-                            <p>Origin</p>
-                            <div class="info_block_value quantity_block d-flex">
+                            <p>Quantity</p>
+                            {{!-- <div class="info_block_value quantity_block d-flex">
                                 <button id="btnMinus">
                                     <i class="bi bi-dash"></i>
                                 </button>
@@ -77,7 +79,17 @@
                                 <button id="btnPlus">
                                     <i class="bi bi-plus"></i>
                                 </button>
-                            </div>
+                            </div> --}}
+                            <div class="info_block_value quantity_block">
+                                <button class="can-hover" id="btnMinus">
+                                    <img src="/public/images/icon-minus.png" alt="" class="iconAction">
+                                </button>
+                                <input id="txtCount" type="text" value="1" readonly>
+                                <button class="can-hover" id="btnPlus">
+                                    <img src="/public/images/icon-plus.png" alt="" class="iconAction">
+                                </button>
+                             </div>
+
                         </div>
                     </div>
                     <div class="col-6">
@@ -93,7 +105,7 @@
 
     <div class="row">
         <div class="shop_block">
-            <img src="/public/images/product.png" alt="">
+            <img src="/public/images/fruits/nhoDalat400.webp" alt="">
             <div class="">
                 <div class="shop_name">Lavender</div>
                 <button class="shop_go can-hover">View shop</button>
@@ -103,7 +115,7 @@
 
     <div class="row">
         <div class="long_descript">
-            <h2>Long Description</h2>
+            <h3>Detail Description</h3>
             <p class="col-9">
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores consequuntur cum delectus earum
                 Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repudiandae, saepe dolore nesciunt explicabo

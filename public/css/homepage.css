@@ -66,16 +66,15 @@
 
 .suggest_block_header {
     background-color: var(--primary-color--medium);
-    border: var(--border);
-    border-radius: 12px;
-    padding: 4px 0;
+    border-radius: 8px;
+    padding: 10px 0;
     color: white;
     align-items: center;
 
     display: flex;
     justify-content: center;
     margin: var(--separate-far) 0;
-    font-size: var(--font-size--m);
+    font-size: var(--font-size--l);
     font-weight: 500;
 }
 
