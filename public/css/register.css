@@ -2,7 +2,7 @@
     width: 100%;
     margin-top: 32px;
     margin-bottom: 160px;
-    border: 1px solid #ccc;
+    border: 1px solid var(--primary-color--medium);
     padding: 24px;
     border-radius: 12px;
     box-shadow: var(--box-shadow);
@@ -24,11 +24,11 @@
     border-bottom: 1px solid var(--primary-color--medium);
     font-size: 20px;
     border-radius: 0px;
-    color: var(--primary-color--medium);
+    color: black;
 }
 
 .my_registration_body input::placeholder {
-    color: var(--primary-color--medium);
+    color: black;
 }
 
 .my_registration_body .check_agree {
@@ -40,7 +40,7 @@
 }
 
 .my_registration_body .check_agree a {
-    color: var(--primary-color--medium);
+    color: rgb(55, 82, 236);
     padding-left: 5px;
 }
 
@@ -129,7 +129,7 @@
     font-size: 24px;
     font-weight: 600;
     color: white;
-    margin: 24px 0;
+    /* margin: 24px 0; */
 }
 
 .my_registration_footer p {
