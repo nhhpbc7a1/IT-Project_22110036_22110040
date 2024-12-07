@@ -302,13 +302,15 @@
 }
 .suggest_block_item h5{
     width: 185px;
-    text-align: center;
+    height: 40px;
+    text-align: left;
     font-size: large;
     color: #3f3e3e;
 }
 
 .suggest_block_item img {
-    width: 70%;
+    width: 150px;
+    height: 150px;
 }
 
 .suggest_block_item .price {
