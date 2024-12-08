@@ -49,6 +49,8 @@ app.use('/cart', cartRouter);
 import checkoutRouter from './routes/checkout.route.js';
 app.use('/checkout', checkoutRouter);
 
+import buyer_infoRouter from './routes/buyer_info.route.js';
+app.use('/buyer_info', buyer_infoRouter);
 
 app.listen(3000, function() {
     console.log('app is running at http://localhost:3000');
