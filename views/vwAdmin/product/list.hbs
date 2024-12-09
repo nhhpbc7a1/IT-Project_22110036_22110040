@@ -1,11 +1,5 @@
 <div class="container-fluid">
 
-    <!-- Page Heading -->
-    <h1 class="h3 mb-2 text-gray-800">Tables category</h1>
-    {{!-- <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
-        For more information about DataTables, please visit the <a target="_blank"
-            href="https://datatables.net">official DataTables documentation</a>.</p> --}}
-
     <!-- DataTales Example -->
     <div id="table-wrapper"></div>
 
@@ -22,7 +16,6 @@
         /* Giới hạn chiều rộng tối đa */
     }
 </style>
-<link href="/node_modules/gridjs/dist/theme/mermaid.min.css" rel="stylesheet" />
 {{/section}}
 
 {{#section 'js'}}
@@ -31,14 +24,14 @@
 <script>
 
     function formatPrice(price) {
-        return numeral(price).format('0.000') + ' VNĐ';  // Định dạng theo kiểu số VNĐ
+        return numeral(price).format('0,000') + ' VNĐ';  // Định dạng theo kiểu số VNĐ
     }
 
     // Lấy dữ liệu từ this.product đã chuyển sang JSON
     const productData = {{{ json this.products }}};
 
     // Chuyển đổi dữ liệu từ đối tượng thành mảng để sử dụng trong Grid.js
-    const data = productData.map(item => [item.product_id, item.name, item.image_url, item.cost_price, item.sale_price, item.description,]);
+    const data = productData.map(item => [item.product_id, item.name, item.image_url, item.cost_price, item.selling_price, item.description,]);
 
     // Khởi tạo bảng Grid.js
     new gridjs.Grid({
@@ -47,7 +40,7 @@
                 name: "Hình ảnh",
                 formatter: (cell, row) => {
                     return gridjs.html(`                        
-                        <img src="/${row.cells[2].data}" class="img-thumbnail" alt="..." style="width: 100px; height: 100px;">
+                        <img src="${row.cells[2].data}" class="img-thumbnail" alt="..." style="width: 100px; height: 100px;">
                         `);
                 }
             },
@@ -100,7 +93,7 @@
                 name: "Hành động",
                 formatter: (cell, row) => {
                     return gridjs.html(`                        
-                        <a class="btn btn-sm btn-primary" href="/manager/product/edit?id=${row.cells[0].data}" role="button">
+                        <a class="btn btn-sm btn-primary" href="/admin/product/edit?id=${row.cells[0].data}" role="button">
                             <i class="bi bi-pencil-square"></i>
                         </a>`);
                 }

@@ -40,7 +40,7 @@ CREATE TABLE products (
     quantity INT DEFAULT 0,
     description TEXT,
     cost_price DECIMAL(10, 2) NOT NULL DEFAULT 0, -- Giá vốn
-    sale_price DECIMAL(10, 2) NOT NULL,          -- Giá bán
+    selling_price DECIMAL(10, 2) NOT NULL,          -- Giá bán
     image_url VARCHAR(255),
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (category_id) REFERENCES categories(category_id)
@@ -58,7 +58,7 @@ CREATE TABLE orders (
     delivery_fee DECIMAL(10, 2),
     items_price DECIMAL(10, 2),
     total_cost DECIMAL(10, 2) DEFAULT 0,       -- Tổng giá vốn
-    total_sale DECIMAL(10, 2),                 -- Tổng giá bán
+    total_selling DECIMAL(10, 2),                 -- Tổng giá bán
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users(user_id),

@@ -66,6 +66,11 @@
     display: block;
 }
 
+.info_part,
+.action_block {
+    box-shadow: var(--box-shadow);
+}
+
 .info_part + .info_part {
     margin-top: var(--separate-far);
 }
@@ -77,6 +82,7 @@
 .info_part .card-header h4{
     font-size: 20px;
     font-weight: 600;
+    color: black;
 }
 
 .action_block {

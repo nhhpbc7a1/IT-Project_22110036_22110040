@@ -16,7 +16,7 @@ app.engine('hbs', engine({
     defaultLayout: 'buyer',
     helpers: {
         format_price(value) {
-            return numeral(value).format('0.000') + ' VNĐ';
+            return numeral(value).format('0,000') + ' VNĐ';
         },
         json(context) {
             return JSON.stringify(context);

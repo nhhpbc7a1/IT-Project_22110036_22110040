@@ -12,26 +12,10 @@ router.get('/', async function(req, res) {
     res.render('vwAdmin/dashboard');
 });
 
-router.get('/product/list', async function(req, res) {
-    const products = await manage_productService.findAll();
-    console.log(products);
-    res.render('vwAdmin/product/list', {
-        products: products,
-    });
-});
+import manage_productRouter from '../routes/admin/manage_product.route.js';
+router.use('/product', manage_productRouter);
 
-router.get('/product/add', async function(req, res) {
-    const products = await manage_productService.findAll();
-    console.log(products);
-    res.render('vwAdmin/product/add', {
-        products: products,
-    });
-});
-
-
-router.get('/category/list', async function(req, res) {
-    res.render('vwAdmin//category/list');
-});
-
+import manage_categoryRouter from '../routes/admin/manage_category.route.js';
+router.use('/category', manage_categoryRouter);
 
 export default router;

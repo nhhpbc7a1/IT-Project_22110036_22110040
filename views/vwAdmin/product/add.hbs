@@ -80,14 +80,14 @@
                                 <div class="form-group">
                                     <div class="form-group">
                                         <label for="txtName">Stock</label>
-                                        <input type="number" name="name" id="txtName" class="form-control">
+                                        <input type="number" name="quantity" id="txtName" class="form-control">
                                     </div>
                                 </div>
                             </div>
                             <div class="col-6">
                                 <div class="form-group">
                                     <label for="exampleFormControlSelect1">Data turn off</label>
-                                    <input type="text" name="name" id="txtName" class="form-control">
+                                    <input type="text" name="" id="txtName" class="form-control">
                                 </div>
                             </div>
                         </div>
@@ -118,8 +118,8 @@
                             <div class="col-6">
 
                                 <div class="form-group">
-                                    <label for="txtSalePrice">Sale Price</label>
-                                    <input type="number" name="sale_price" id="txtSalePrice" class="form-control">
+                                    <label for="txtSellingPrice">Selling Price</label>
+                                    <input type="number" name="selling_price" id="txtSellingPrice" class="form-control">
                                 </div>
                             </div>
                         </div>
@@ -128,14 +128,10 @@
 
 
                 <div class=" text-muted action_block">
-                    <a name="" id="" class="btn btn-outline-success" href="/manager/menu_item" role="button">
+                    <a name="" id="" class="btn btn-outline-success" href="/admin/product" role="button">
                         <i class="bi bi-skip-backward-fill"></i>
                     </a>
-                    {{!-- <button type="submit" class="btn btn-danger" formaction="/admin/categories/del">
-                        <i class="bi bi-trash"></i>
-                        delete
-                    </button> --}}
-                    <button type="submit" class="btn btn-primary ml-3">
+                    <button type="submit" class="btn btn-primary ml-3" formaction="/admin/product/add">
                         <i class="bi bi-check2"></i>
                         save
                     </button>
