@@ -86,9 +86,10 @@ INSERT INTO products (name, category_id, quantity, description, cost_price, sale
 INSERT INTO status (status_name) VALUES 
 ('Pending'), 
 ('Processing'), 
-('Completed');
+('Completed'),
 ('Cancelled'),
-('Returned')
+('Returned');
+
 -- Insert data vào bảng orders
 INSERT INTO orders (user_id, status_id, delivery_fee, items_price, total_cost, total_sale) VALUES 
 (2, 1, 5.0, 20.0, 15.0, 25.0),
