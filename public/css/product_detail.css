@@ -196,6 +196,9 @@
     /* border: 1px solid #ccc;
     padding: 0px 4px; */
     line-height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
 }
 .quantity_block #btnMinus{
@@ -204,6 +207,7 @@
 
 }
 .quantity_block #btnPlus{
+    top: 0;
     right: 0;
     background-color: rgb(115,220,243);
 }
@@ -213,7 +217,7 @@
     width: 120px;
     border-radius: 30px;
     height: 28px;
-
+    display: inline-block;
 }
 .iconAction{
     width: 80%;

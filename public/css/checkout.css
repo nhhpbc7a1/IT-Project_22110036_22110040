@@ -68,7 +68,7 @@ tr th:first-child {
     padding-left: 32px;
 }
 
-.my_table .label {
+.my_table .my_label {
     margin-left: 16px;
 }
 
@@ -77,8 +77,15 @@ tr th:first-child {
     padding: 16px;
 }
 
+.delivery_block .my_label,
+.payment_block .my_label {
+    color: var(--primary-color--medium);
+}
+
+
+
 .payment_block i {
-    display:none;
+    /* display:none; */
 }
 
 .payment_block .be_choosen{

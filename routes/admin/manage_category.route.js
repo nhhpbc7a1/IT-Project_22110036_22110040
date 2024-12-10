@@ -2,6 +2,16 @@ import express from 'express';
 import manage_categoryService from '../../services/admin/manage_category.service.js';
 
 const router = express.Router();
+
+router.get('/', async function(req, res) {
+    const categories = await manage_categoryService.findAll();
+
+    res.locals.title = 'List categories';
+    res.render('vwAdmin/category/list', {
+        categories: categories,
+    });
+});
+
 router.get('/list', async function(req, res) {
     const categories = await manage_categoryService.findAll();
 

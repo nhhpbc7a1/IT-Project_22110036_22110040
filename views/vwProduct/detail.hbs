@@ -26,29 +26,31 @@
     <div class="row mt-3">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb" style="background-color: transparent; font-size: 20px;">
-                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item"><a href="#">Fruit</a></li>
-                <li class="breadcrumb-item active" aria-current="page" style="color: rgb(46, 45, 45);">Da Lat Strawberry</li>
+                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                <li class="breadcrumb-item"><a href="/product/list/byCat?id={{product.category_id}}">{{product.category_name}}</a></li>
+                <li class="breadcrumb-item active" aria-current="page" style="color: rgb(46, 45, 45);">{{product.name}}
+                </li>
             </ol>
         </nav>
     </div>
     <div class="row">
         <div class="detail_block">
             <div class="detail_block_img col-4">
-                <img src="/public/images/products/camUc.png" alt="">
+                <img src="{{product.image_url}}" alt="">
                 <i class="bi bi-heart"></i>
             </div>
             <div class="detail_block_content col-8">
-                <h3 class="name">Da Lat Strawberry</h3>
+                <h3 class="name">{{product.name}}</h3>
                 <div class="price_block">
-                    <span class="price">150.000 đ</span>
-                    <span class="old_price">120.000 đ</span>
+                    <span class="price">{{format_price product.selling_price}}</span>
+                    {{!-- <span class="old_price">120.000 đ</span> --}}
                 </div>
                 <div class="info_block">
                     <p>Stock</p>
                     <div class="info_block_value stock_status">
                         <i class="bi bi-check"></i>
-                        available</div>
+                        available
+                    </div>
                 </div>
                 <div class="info_block">
                     <div class="abstract">
@@ -62,11 +64,11 @@
                     <div class="col-6">
                         <div class="info_block">
                             <p>Catergory</p>
-                            <div class="info_block_value ">Fruit</div>
+                            <div class="info_block_value ">{{product.category_name}}</div>
                         </div>
                         <div class="info_block">
                             <p>Origin</p>
-                            <div class="info_block_value ">Da Lat</div>
+                            <div class="info_block_value ">Empty</div>
                         </div>
 
                         <div class="info_block">
@@ -82,13 +84,13 @@
                             </div> --}}
                             <div class="info_block_value quantity_block">
                                 <button class="can-hover" id="btnMinus">
-                                    <img src="/public/images/icon-minus.png" alt="" class="iconAction">
+                                    <i class="bi bi-dash"></i>
                                 </button>
                                 <input id="txtCount" type="text" value="1" readonly>
                                 <button class="can-hover" id="btnPlus">
-                                    <img src="/public/images/icon-plus.png" alt="" class="iconAction">
+                                    <i class="bi bi-plus"></i>
                                 </button>
-                             </div>
+                            </div>
 
                         </div>
                     </div>
@@ -114,21 +116,11 @@
     </div>
 
     <div class="row">
-        <div class="long_descript">
+        <div class="long_descript" style="width: 100%;">
             <h3>Detail Description</h3>
             <p class="col-9">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores consequuntur cum delectus earum
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repudiandae, saepe dolore nesciunt explicabo
-                quibusdam id sunt obcaecati dolores odit illum expedita! Earum numquam, quo ipsum architecto modi odio
-                at ea.
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error esse adipisci alias quam, pariatur,
-                sunt, aperiam aliquid aliquam nam magni aut et. Dolores qui beatae, officiis iste porro maxime vero!
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores consequuntur cum delectus earum
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repudiandae, saepe dolore nesciunt explicabo
-                quibusdam id sunt obcaecati dolores odit illum expedita! Earum numquam, quo ipsum architecto modi odio
-                at ea.
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error esse adipisci alias quam, pariatur,
-                sunt, aperiam aliquid aliquam nam magni aut et. Dolores qui beatae, officiis iste porro maxime vero!
+                {{product.description}}
+                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ipsa repellat sit voluptates repudiandae iusto ad maiores optio quam voluptatum totam. Odit dignissimos magnam eum nostrum at, alias temporibus dicta culpa.
             </p>
         </div>
     </div>

@@ -1,1 +1,116 @@
-<h1>Here profile</h1>
+{{#section 'css'}}
+<link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css">
+<link rel="stylesheet" href="/public/css/buyer_profile.css">
+{{/section}}
+
+{{#section 'js'}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script
+    src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
+<script>
+    var oldUsername = "{{this.userInfo.username}}";
+    $(document).ready(function () {
+        $('#txtBirthday').datetimepicker({
+            timepicker: false,
+            format: 'd/m/Y',
+            mask: true
+        });
+
+        $('#frmProfile').on('submit', function (e) {
+            e.preventDefault();
+            const UserName = $('#txtUsername').val();
+            if (UserName.length === 0) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Username is required'
+                });
+                return;
+            }
+
+            $.getJSON('/account/is-available?username=' + UserName, function (data) {
+                if (data && UserName != oldUsername) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'Username is not available or an error occurred'
+                    });
+                } else {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Success',
+                        text: 'Username is available'
+                    });
+                    $('#frmProfile').off('submit').submit();  // Corrected selector syntax
+                }
+            });
+        });
+    });
+</script>
+{{/section}}
+
+
+
+<form id="frmProfile" action="/buyer_info/patch" method="post">
+    <div class="container">
+        <div class="my_card_info">
+            <div class="my_head">
+                <div class="">
+                    <div class="title">
+                        <span>My Profile</span>
+                    </div>
+                    <div class="" style="font-size: 14px; color: #808080">
+                        <span>Personal Information</span>
+                    </div>
+                </div>
+                <div class="lorem">
+                    <span>Update</span>
+                </div>
+            </div>
+            <hr style="border-width: 2px;">
+            <div class="my_mid">
+                <ul class="input_list">
+                    <li class="input_item">
+                        <label for="txtUsername">Username</label>
+                        <input type="text" id="txtUsername" name="username" value="{{userInfo.username}}">
+                    </li>
+                    <li class="input_item">
+                        <label for="full_name">Full name</label>
+                        <input type="text" id="full_name" name="full_name" value="{{userInfo.full_name}}">
+                    </li>
+                    <li class="input_item">
+                        <label for="birthday">Birthday</label>
+                        <input type="text" id="txtBirthday" name="birthday" value="{{userInfo.birthday}}">
+                    </li>
+                    <li class="input_item">
+                        <label for="phone_number">Phone number</label>
+                        <input type="text" id="phone_number" name="phone_number" value="{{userInfo.phone_number}}">
+                    </li>
+                    <li class="input_item">
+                        <label for="address">Address</label>
+                        <input type="text" id="address" name="address" value="{{userInfo.address}}">
+                    </li>
+                    <li class="input_item">
+                        <label for="email">Email</label>
+                        <input type="text" id="email" name="email" value="{{userInfo.email}}">
+                    </li>
+                    <li class="input_item">
+                        <label for="gender">Gender</label>
+                        <div class="">
+                            <input type="radio" id="male" name="gender" value="Male" {{#ifEquals "Male" userInfo.gender
+                                }} checked{{/ifEquals}}>
+                            <label for="male">Male</label>
+                            <input type="radio" id="female" name="gender" value="Female" {{#ifEquals "Female"
+                                userInfo.gender }} checked{{/ifEquals}}>
+                            <label for="female">Female</label>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="my_bot">
+                <button type="submit">Save</button>
+            </div>
+        </div>
+    </div>
+</form>

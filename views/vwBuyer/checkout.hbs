@@ -8,220 +8,250 @@
 {{#section 'js'}}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
+    $(document).ready(function () {
+        $('#frmCheckOut').submit(function (event) {
+            event.preventDefault(); // Ngăn chặn hành vi mặc định của form
+            const form = $('#frmCheckOut');
+            // Lấy dữ liệu từ các input trong form
+            const formData = new FormData(form[0]);
+
+            const formObject = {};
+            formData.forEach((value, key) => {
+                if (key === 'cart_id_list') {
+                    if (!formObject[key]) {
+                        formObject[key] = [];
+                    }
+                    formObject[key].push(value);
+                } else {
+                    formObject[key] = value;
+                }
+            }); 
+            
+            console.log(formObject);
+
+            Swal.fire({
+                title: 'Xác nhận đặt hàng',
+                text: 'Vui lòng kiểm tra lại thông tin!',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Xác nhận',
+                cancelButtonText: 'Hủy'
+            })
+
+                .then((result) => {
+                    if (result.isConfirmed) {
+                        // Gửi yêu cầu POST
+                        $.ajax({
+                            type: 'POST',
+                            url: '/checkout/create_order', // Thay thế bằng đường dẫn đến endpoint của bạn
+                            contentType: 'application/json',
+                            data: JSON.stringify(formObject),
+                            success: function (response) {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Đặt hàng thành công!',
+                                    text: 'Cảm ơn bạn đã đặt hàng!'
+                                });
+                            },
+                            error: function (error) {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Đặt hàng thất bại!',
+                                    text: 'Vui lòng thử lại sau!'
+                                });
+                            }
+                        });
+                    }
+                });
+        });
+    });
 </script>
 {{/section}}
 
-
-<div class="container">
-    <div class="row mt-3">
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb" style="background-color: transparent; font-size: 20px;">
-                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item"><a href="#">Fruit</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Da Lat Strawberry</li>
-            </ol>
-        </nav>
-    </div>
-    <div class="row">
-        <div class="address_block">
-            <div class="address_block_info">
-                <div class="row">
-                    <div class="col-3">
-                        <div class="row">
-                            <i class="bi bi-geo-alt-fill"></i>
-                            <div class="info_type">
-                                Address
-                            </div>
-                        </div>
-                        <div class="row mt-2">
-                            <i class="bi bi-person-fill"></i>
-                            <div class="info_type">
-                                Customer
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-9">
-                        <div class="row">
-                            <div class="receiver_address">
-                                Phước Long A Quận 10, thành phố HCM
-                            </div>
-                        </div>
-                        <div class="row mt-2">
-                            <div id="receiver_name">Le Thi Thu Huong</div>
-                            <div class="" id="receiver_phone">0392163654</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="address_block_action">
-                <a name="" id="" class="" href="#" role="button">
-                    <i class="bi bi-pencil"></i>
-                </a>
-            </div>
+<form id="frmCheckOut" action="/checkout/create_order" method="post">
+    <div class="container">
+        <div class="row mt-3">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb" style="background-color: transparent; font-size: 20px;">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Checkout</li>
+                </ol>
+            </nav>
         </div>
-    </div>
-    <div class="row mt-4">
-        <table class="my_table">
-            <thead>
-                <tr>
-                    <th width="100px">Product</th>
-                    <th> &nbsp;</th>
-                    <th style="text-align: left;">Type</th>
-                    <th>Quantity</th>
-                    <th>Price</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td width="200px">
-                        <img src="/public/images/products/dautay.png" alt="" width="150px">
-                    </td>
-                    <td width="150px">
-                        <div class="product_name">Dau Da jsadkjas jskjs jSKJs jSjs jsJA</div>
-                    </td>
-                    <td width="150px" style="text-align: left;">
-                        Vegetables
-                    </td>
-                    <td width="150px">
-                        <div class="quantity_block">
-                            1
-                        </div>
-                    </td>
-                    <td width="150px">
-                        <div class="product_price">
-                            1.000đ
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <img src="/public/images/products/duahaudo.png" alt="" width="150px">
-                    </td>
-                    <td width="150px">
-                        <div class="product_name">Dau Da jsadkjas jskjs jSKJs jSjs jsJA</div>
-                    </td>
-                    <td width="150px" style="text-align: left;">
-                        Cakes
-                    </td>
-                    <td width="120px">
-                        <div class="quantity_block">
-                            1
-                        </div>
-                    </td>
-                    <td>
-                        <div class="product_price">
-                            150.0000đ
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <img src="/public/images/products/chanhday.png" alt="" width="150px">
-                    </td>
-                    <td width="150px">
-                        <div class="product_name">Dau Da jsadkjas jskjs jSKJs jSjs jsJA</div>
-                    </td>
-                    <td width="150px" style="text-align: left;">
-                        Fruits
-                    </td>
-                    <td width="120px">
-                        <div class="quantity_block">
-                            1
-                        </div>
-                    </td>
-                    <td>
-                        <div class="product_price">
-                            150.000đ
-                        </div>
-                    </td>
-                </tr>
-                <tr class="delivery_block">
-                    <td colspan="2">
-                        <div class="d-flex align-items-center">
-                            <i class="fa-solid fa-truck"></i>
-                            <div class="label">
-                                Deliver method
-                                <p>We guarantee that you will get your order within 7 days</p>
-                            </div>
-
-                        </div>
-                    </td>
-                    <td style="text-align: left;">
-                        Fast
-                        <i class="bi bi-pencil"></i>
-                    </td>
-                    <td>&nbsp;</td>
-                    <td>
-                        <div class="delivery_fee">
-                            350.000đ
-                        </div>
-                    </td>
-                </tr>
-                <tr class="payment_block">
-                    <td colspan="2">
-                        <div class="d-flex">
-                            <i class="fa-solid fa-money-bill-trend-up"></i>
-                            <div class="label">
-                                Payment method
-                            </div>
-                        </div>
-                    </td>
-                    <td style="text-align: left;">
-                        <div class="be_choosen">
-                            COD
-                            <i class="bi bi-check"></i>
-                        </div>
-                        <div class="">
-                            Paypal
-                            <i class="bi bi-check"></i>
-                        </div>
-                    </td>
-                    <td>&nbsp;</td>
-                    <td>
-                        &nbsp;
-                    </td>
-                </tr>
-
-        </table>
-
         <div class="row">
+            <div class="address_block">
+                <div class="address_block_info">
+                    <div class="row">
+                        <div class="col-3">
+                            <div class="row">
+                                <i class="bi bi-geo-alt-fill"></i>
+                                <div class="info_type">
+                                    Address
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-9">
+                            <div class="row receiver_address">
+                                {{userInfo.address}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-3">
+                            <div class="row">
+                                <i class="bi bi-person-fill"></i>
+                                <div class="info_type">
+                                    Customer
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-9">
+                            <div class="row">
+                                <div id="receiver_name">{{userInfo.full_name}}</div>
+                                <div class="" id="receiver_phone">{{userInfo.phone_number}}</div>
+                            </div>
 
-        </div>
-    </div>
-    <div class="row mt-5">
-        <div class="total_block">
-            <div class="col d-flex justify-content-between" style="width: 100%;">
-                <div class="total_block_item">
-                    <div>Total items</div>
-                    <span>2</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="total_block_item">
-                    <div>Product</div>
-                    <span style="color: red;">3.000.000đ</span>
-                </div>
-                <div class="total_block_item">
-                    <div>Delivery</div>
-                    <span style="color: red;">5.000đ</span>
-                </div>
-                <div class="total_block_item">
-                    <div>Total</div>
-                    <span style="color: red;">3.005.000đ</span>
+                <div class="address_block_action">
+                    <a name="" id="" class="" href="#" role="button">
+                        <i class="bi bi-pencil"></i>
+                    </a>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="row mt-3 bottom_block">
-        <div class="col-9 input-group mb-3">
-            <input type="text" class="form-control" placeholder="Message for seller">
-            <div class="input-group-append">
-                <span class="input-group-text" id="basic-addon2">
-                    <i class="bi bi-envelope-fill"></i>
-                </span>
+        <input type="hidden" name="address" value="{{userInfo.address}}">
+        <input type="hidden" name="full_name" value="{{userInfo.full_name}}">
+        <input type="hidden" name="phone_number" value="{{userInfo.phone_number}}">
+        <input type="hidden" name="shipping_fee" value="{{shipping_fee}}">
+        <input type="hidden" name="total_selling" value="{{total_price}}">
+
+        <div class="row mt-4">
+            <table class="my_table">
+                <thead>
+                    <tr>
+                        <th width="100px">Product</th>
+                        <th> &nbsp;</th>
+                        <th style="text-align: left;">Type</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each checkout_list}}
+                    <input type="hidden" name="cart_id_list" value="{{cart_id}}">
+                    <tr>
+                        <td width="200px">
+                            <img src="{{image_url}}" alt="" width="150px">
+                        </td>
+                        <td width="150px">
+                            <div class="product_name">{{name}}</div>
+                        </td>
+                        <td width="150px" style="text-align: left;">
+                            {{category_name}}
+                        </td>
+                        <td width="150px">
+                            <div class="quantity_block">
+                                {{quantity}}
+                            </div>
+                        </td>
+                        <td width="150px">
+                            <div class="product_price">
+                                {{format_price item_total_price}}
+                            </div>
+                        </td>
+                    </tr>
+                    {{/each}}
+                    <tr class="delivery_block">
+                        <td colspan="2">
+                            <div class="my_label d-flex align-items-center">
+                                <i class="fa-solid fa-truck mr-3"></i>
+                                <div class="">
+                                    Deliver method
+                                    <p style="color: black; font-size: 12px; font-weight:400;">We guarantee that you will get your order within 7 days</p>
+                                </div>
+
+                            </div>
+                        </td>
+                        <td style="text-align: left;">
+                            Fast
+                            <i class="bi bi-pencil"></i>
+                        </td>
+                        <td>&nbsp;</td>
+                        <td>
+                            <div class="delivery_fee">
+                                {{format_price shipping_fee}}
+                            </div>
+                        </td>
+                    </tr>
+                    <tr class="payment_block">
+                        <td colspan="2">
+                            <div class="my_label d-flex">
+                                <i class="fa-solid fa-money-bill-trend-up mr-3"></i>
+                                <div class="">
+                                    Payment method
+                                </div>
+                            </div>
+                        </td>
+                        <td style="text-align: left;">
+                            <div class="be_choosen">
+                                COD
+                                <i class="bi bi-check"></i>
+                            </div>
+                            <div class="">
+                                Paypal
+                            </div>
+                        </td>
+                        <td>&nbsp;</td>
+                        <td>
+                            &nbsp;
+                        </td>
+                    </tr>
+
+            </table>
+
+            <div class="row">
+
             </div>
         </div>
-        <div class="col-3">
-            <button class="btn btn-primary" style="width: 100%;">Place order</button>
+        <div class="row mt-5">
+            <div class="total_block">
+                <div class="col d-flex justify-content-between" style="width: 100%;">
+                    <div class="total_block_item">
+                        <div>Total items</div>
+                        <span>{{checkout_list.length}}</span>
+                    </div>
+                    <div class="total_block_item">
+                        <div>Product</div>
+                        <span style="color: red;">{{format_price product_total}}</span>
+                    </div>
+                    <div class="total_block_item">
+                        <div>Delivery</div>
+                        <span style="color: red;">{{format_price shipping_fee}}</span>
+                    </div>
+                    <div class="total_block_item">
+                        <div>Total</div>
+                        <span style="color: red;">{{format_price total_price}}</span>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
+        <div class="row mt-3 bottom_block">
+            <div class="col-9 input-group mb-3">
+                <input type="text" class="form-control" placeholder="Message for seller">
+                <div class="input-group-append">
+                    <span class="input-group-text" id="basic-addon2">
+                        <i class="bi bi-envelope-fill"></i>
+                    </span>
+                </div>
+            </div>
+            <div class="col-3">
+                <button class="btn btn-primary" style="width: 100%;" type="submit">Place order</button>
+            </div>
+        </div>
 
-</div>
+    </div>
+</form>

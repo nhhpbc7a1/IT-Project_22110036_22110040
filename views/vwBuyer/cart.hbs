@@ -4,20 +4,149 @@
 
 {{#section 'js'}}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
+<script>
+    function formatPrice(price) {
+        return numeral(price).format('0,000') + ' VNĐ';  // Định dạng theo kiểu số VNĐ
+    }
+
+    $(document).ready(function () {
+        function updateCartItemPrice(cart_id, count) {
+            const selling_price = $(`#selling_price_id_${cart_id}`);
+            const totalPrice = selling_price.data('selling-price');
+            selling_price.text(formatPrice(totalPrice * count));
+        }
+
+        $('.btnMinus').click(function () {
+            const cart_id = $(this).data('cart-id');
+            const txtCount = $(`#txtCount_${cart_id}`);
+            var count = parseInt(txtCount.val());
+            if (count > 1)
+                txtCount.val(--count);
+
+            updateCartItemPrice(cart_id, count);
+            updateTotalPrice();
+        });
+        $('.btnPlus').click(function () {
+            const cart_id = $(this).data('cart-id');
+            const txtCount = $(`#txtCount_${cart_id}`);
+            var count = parseInt(txtCount.val());
+            if (count < 10000)
+                txtCount.val(++count);
+
+            updateCartItemPrice(cart_id, count);
+            updateTotalPrice();
+        });
+
+        // Handle checkbox state change on all items
+        $('.itemCheckbox').change(function () {
+            const isChecked = $(this).is(':checked');
+            const allChecked = $('.itemCheckbox:checked').length === $('.itemCheckbox').length;
+
+            // Update "Select All" checkbox state
+            $('#selectAllCheckbox').prop('checked', allChecked);
+
+            // Update data attribute if necessary
+            if (allChecked !== $('#selectAllCheckbox').data('checked')) {
+                $('#selectAllCheckbox').data('checked', allChecked);
+            }
+
+            updateTotalPrice();
+        });
+
+        // Handle "Select All" checkbox state change
+        $('#selectAllCheckbox').change(function () {
+            const isChecked = $(this).is(':checked');
+            $('.itemCheckbox').prop('checked', isChecked);
+            updateTotalPrice();
+        });
+
+        function updateTotalPrice() {
+            let cnt = 0;
+            let totalPrice = 0;
+            $('.itemCheckbox:checked').each(function () {
+                const productPrice = parseFloat($(this).data('product-price'));
+
+                const cart_id = parseInt($(this).data('cart-id'));
+                const txtCount = $(`#txtCount_${cart_id}`);
+                var count = parseInt(txtCount.val());
+                updateCartItemPrice(cart_id, count);
+                totalPrice += productPrice * count;
+                cnt++;
+            });
+            $('#txtTotalPrice').html(formatPrice(totalPrice));
+            $('#txtCountChoosen').html(cnt);
+
+        }
+
+        function updateAllPrice() {
+            $('.itemCheckbox').each(function () {
+                const cart_id = parseInt($(this).data('cart-id'));
+                const txtCount = $(`#txtCount_${cart_id}`);
+                var count = parseInt(txtCount.val());
+                updateCartItemPrice(cart_id, count);
+            });
+        }
+
+
+        //$('#selectAllCheckbox').prop('checked', true);
+        //$('.itemCheckbox').prop('checked', true);
+        updateTotalPrice();
+        updateAllPrice();
+    });
+</script>
 <script>
     $(document).ready(function () {
-        $('#btnMinus').click(function () {
-            var count = parseInt($('#txtCount').val());
-            if (count > 1)
-                $('#txtCount').val(--count);
-        })
+        $('#checkoutButton').click(function () {
+            // Get an array of checked item IDs
+            const checkedItemIds = $('.itemCheckbox:checked').map(function () {
+                return $(this).data('cart-id');
+            }).get();
 
-        $('#btnPlus').click(function () {
-            var count = parseInt($('#txtCount').val());
-            $('#txtCount').val(++count);
-        })
+            // If no items are checked, show an alert message
+            if (checkedItemIds.length === 0) {
+                alert('Vui lòng chọn sản phẩm để thanh toán!');
+                return false; // Prevent form submission if no items are checked
+            }
 
+            // Create a form element
+            const form = $('<form>')
+                .attr('method', 'POST')
+                .attr('action', '/checkout') // Replace with your desired endpoint
+                .hide();
+
+            // Add an input field for each checked item ID
+            checkedItemIds.forEach(function (cartItemId) {
+                $('<input>')
+                    .attr('type', 'hidden')
+                    .attr('name', 'cart_ids[]')
+                    .val(cartItemId)
+                    .appendTo(form);
+            });
+
+            // Append the form to the body and submit it
+            $('body').append(form);
+            form.submit();
+        });
     });
+</script>
+
+<script>
+    function submitForm(formId) {
+        $.ajax({
+            type: 'POST',
+            url: $('#' + formId).attr('action'),
+            data: $('#' + formId).serialize(),
+            success: function (response) {
+                // Handle success response
+                console.log('Form submitted successfully!');
+            },
+            error: function (xhr, status, error) {
+                // Handle error response
+                console.error('Form submission failed:', error);
+            }
+        });
+    }
 </script>
 {{/section}}
 
@@ -25,16 +154,18 @@
     <div class="row mt-3">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb" style="background-color: transparent; font-size: 20px;">
-                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item"><a href="/">Home</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Cart</li>
             </ol>
         </nav>
     </div>
     <div class="row">
-        <table class="my_table " >
+        <table class="my_table ">
             <thead>
                 <tr>
-                    <th width="50px" class="setDistanceForCb"><input type="checkbox"></th>
+                    <th width="50px" class="setDistanceForCb">
+                        <input type="checkbox" id="selectAllCheckbox" data-checked="{{ allChecked }}">
+                    </th>
                     <th width="100px">Product</th>
                     <th> &nbsp;</th>
                     <th>Type</th>
@@ -44,31 +175,47 @@
                 </tr>
             </thead>
             <tbody>
+                {{#each cart_items}}
                 <tr>
-                    <td scope="row" class="setDistanceForCb"><input type="checkbox" ></td>
+                    <td scope="row" class="setDistanceForCb">
+                        <input type="checkbox" class="itemCheckbox" data-product-id="{{ product_id }}"
+                            data-product-price="{{selling_price}}" data-product-quantity="{{quantity}}"
+                            data-cart-id="{{cart_id}}">
+                    </td>
                     <td width="200px">
-                        <img src="/public/images/products/dautay.png" alt="" width="150px">
+                        <img src="{{image_url}}" class="img-thumbnail" alt="..." style="width: 100px; height: 100px;">
                     </td>
                     <td width="150px">
-                        <div class="product_name" >Dau Da  jsadkjas jskjs jSKJs jSjs jsJA</div>
+                        <div class="product_name">{{name}}</div>
                     </td>
                     <td width="150px">
-                        Vegetables
+                        {{category_name}}
                     </td>
                     <td width="150px">
                         <div class="quantity_block">
-                            <button class="btn Minus can-hover">
+                            <form id="frm_cart_minus_{{cart_id}}" action="/cart/minus" method="post"
+                                style="display: none;">
+                                <input type="hidden" name="cart_id" value="{{cart_id}}">
+                            </form>
+                            <form id="frm_cart_plus_{{cart_id}}" action="/cart/plus" method="post"
+                                style="display: none;">
+                                <input type="hidden" name="cart_id" value="{{cart_id}}">
+                            </form>
+                            <button class="btnMinus btn Minus can-hover"
+                                onclick="submitForm('frm_cart_minus_{{cart_id}}')" data-cart-id="{{cart_id}}">
                                 <img src="/public/images/icon-minus.png" alt="" class="iconAction">
                             </button>
-                            <input class="txtCount" type="text" value="1" readonly>
-                            <button class="btn Plus can-hover">
+                            <input class="txtCount" id="txtCount_{{cart_id}}" type="text" value="{{quantity}}" readonly>
+                            <button class="btnPlus btn Plus can-hover" onclick="submitForm('frm_cart_plus_{{cart_id}}')"
+                                data-cart-id="{{cart_id}}">
                                 <img src="/public/images/icon-plus.png" alt="" class="iconAction">
                             </button>
                         </div>
                     </td>
                     <td width="150px">
-                        <div class="product_price">
-                            150.0000đ
+                        <div class="product_price" id="selling_price_id_{{cart_id}}" data-cart-id="{{cart_id}}"
+                            data-selling-price="{{selling_price}}">
+                            {{format_price selling_price}}
                         </div>
                     </td>
                     <td>
@@ -77,72 +224,8 @@
                         </button>
                     </td>
                 </tr>
-                <tr>
-                    <td scope="row" class="setDistanceForCb"><input type="checkbox" ></td>
-                    <td>
-                        <img src="/public/images/products/duahaudo.png" alt="" width="150px">
-                    </td>
-                    <td width="150px">
-                        <div class="product_name" >Dau Da  jsadkjas jskjs jSKJs jSjs jsJA</div>
-                    </td>
-                    <td width="150px">
-                        Cakes
-                    </td>
-                    <td width="120px">
-                        <div class="quantity_block">
-                            <button class="btn Minus can-hover">
-                                <img src="/public/images/icon-minus.png" alt="" class="iconAction">
-                            </button>
-                            <input class="txtCount" type="text" value="1" readonly>
-                            <button class="btn Plus can-hover">
-                                <img src="/public/images/icon-plus.png" alt="" class="iconAction">
-                            </button>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="product_price">
-                            150.0000đ
-                        </div>
-                    </td>
-                    <td>
-                        <button class="product_delete can-hover">
-                            <i class="bi bi-x"></i>
-                        </button>
-                    </td>
-                </tr>
-                <tr>
-                    <td scope="row" class="setDistanceForCb"><input type="checkbox" ></td>
-                    <td>
-                        <img src="/public/images/products/chanhday.png" alt="" width="150px">
-                    </td>
-                    <td width="150px">
-                        <div class="product_name" >Dau Da  jsadkjas jskjs jSKJs jSjs jsJA</div>
-                    </td>
-                    <td width="150px">
-                        Fruits
-                    </td>
-                    <td width="120px">
-                        <div class="quantity_block">
-                            <button class="btn Minus can-hover">
-                                <img src="/public/images/icon-minus.png" alt="" class="iconAction">
-                            </button>
-                            <input class="txtCount" type="text" value="1" readonly>
-                            <button class="btn Plus can-hover">
-                                <img src="/public/images/icon-plus.png" alt="" class="iconAction">
-                            </button>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="product_price">
-                            150.000đ
-                        </div>
-                    </td>
-                    <td>
-                        <button class="product_delete can-hover">
-                            <i class="bi bi-x"></i>
-                        </button>
-                    </td>
-                </tr>
+
+                {{/each}}
             </tbody>
         </table>
     </div>
@@ -151,15 +234,15 @@
             <div class="left d-flex">
                 <div class="total_block_item">
                     <div>Total items </div>
-                    <span>2</span>
+                    <span id="txtCountChoosen">0</span>
                 </div>
                 <div class="total_block_item ml-4">
                     <div>Total price</div>
-                    <span style="color: red;">3.000.000đ</span>
+                    <span style="color: red;" id="txtTotalPrice">0 VNĐ</span>
                 </div>
             </div>
             <div class="right">
-                <button class="total_block_item can-hover">
+                <button class="total_block_item can-hover" id="checkoutButton">
                     Checkout
                 </button>
             </div>

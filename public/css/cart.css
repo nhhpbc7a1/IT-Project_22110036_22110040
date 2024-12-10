@@ -35,7 +35,7 @@
 
 .my_table tbody tr{
     border-bottom: 1px solid rgb(75, 73, 73);
-    height: 200px;  
+    height: 120px;  
 }
 .product_name{
     width: 150px;

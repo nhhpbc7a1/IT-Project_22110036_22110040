@@ -91,9 +91,9 @@ INSERT INTO status (status_name) VALUES
 ('Returned');
 
 -- Insert data vào bảng orders
-INSERT INTO orders (user_id, status_id, delivery_fee, items_price, total_cost, total_selling) VALUES 
-(2, 1, 5.0, 20.0, 15.0, 25.0),
-(2, 2, 4.0, 40.0, 30.0, 50.0);
+INSERT INTO orders (user_id, status_id, delivery_fee, items_price, total_cost, total_selling, address, phone_number, full_name) VALUES 
+(2, 1, 5.0, 20.0, 15.0, 25.0,'393 to 12 ap tan hau xa tan thuan tay', '0123165435','Nguyen Van A'),
+(2, 2, 4.0, 40.0, 30.0, 50.0,'1 Vo Van Ngan, Thu Duc, TPHCM', '09123435','Nguyen Van B');
 
 -- Insert data vào bảng order_items
 INSERT INTO order_items (order_id, product_id, quantity, price, message_for_cake) VALUES 
