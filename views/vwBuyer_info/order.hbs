@@ -1,0 +1,134 @@
+{{#section 'css'}}
+<link rel="stylesheet" href="/public/css/order_list.css">
+{{/section}}
+
+{{#section 'js'}}
+{{/section}}
+
+
+<div class="container">
+    <div class="row status_block">
+        <div class="col-2">
+            <a class="status_button {{#ifEquals 0 status_id}} is_active {{/ifEquals}}"
+            href="/buyer_info/order?status_id=0">
+                All
+            </a>
+        </div>
+        <div class="col-2">
+            <a class="status_button {{#ifEquals 1 status_id}} is_active {{/ifEquals}}"
+                href="/buyer_info/order?status_id=1">
+                Pending
+            </a>
+        </div>
+        <div class="col-2">
+            <a class="status_button {{#ifEquals 2 status_id}} is_active {{/ifEquals}}"
+            href="/buyer_info/order?status_id=2">
+                Verified
+            </a>
+        </div>
+        <div class="col-2">
+            <a class="status_button {{#ifEquals 3 status_id}} is_active {{/ifEquals}}"
+            href="/buyer_info/order?status_id=3">
+                On delivery
+            </a>
+        </div>
+        <div class="col-2">
+            <a class="status_button {{#ifEquals 4 status_id}} is_active {{/ifEquals}}"
+            href="/buyer_info/order?status_id=4">
+                Completed
+            </a>
+        </div>
+        <div class="col-2">
+            <a class="status_button {{#ifEquals 5 status_id}} is_active {{/ifEquals}}"
+            href="/buyer_info/order?status_id=5">
+                Cancelled
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-12" style="padding: 0;">
+            {{#each orders}}
+            <div class="order_block mt-3">
+                <div class="order_header">
+                    <div class="order_id">#{{order_id}}</div>
+                    <div class="order_status">
+                        <span class="status_text">{{status_name}}</span>
+                        <i class="status_icon bi bi-check-circle-fill"></i>
+                    </div>
+                </div>
+                <hr>
+                {{#each items}}
+                <div class="order_details">
+
+                    <div class="order_item">
+                        <div class="item_image">
+                            <img src="{{image_url}}" class="img-thumbnail" alt="..." style="width: 80px; height: 80px;">
+                        </div>
+                        <div class="item_details">
+                            <div class="item_name">{{name}}</div>
+                            <div class="item_quantity">x{{quantity}}</div>
+                        </div>
+                    </div>
+                    <div class="item_price">
+                        {{!-- <span class="old_price">1000</span> --}}
+                        <span class="selling_price">{{format_price price}}</span>
+                    </div>
+                </div>
+                <hr>
+                {{/each}}
+                <div class="order_delivery">
+                    <div class="d-flex">
+                        <span>
+                            <i class="fa-solid fa-truck"></i>
+                            Delivery method
+                        </span>
+                        <div class="content">
+                            Fast
+                        </div>
+                    </div>
+                    <div class="shipping_fee">{{format_price delivery_fee}}</div>
+                </div>
+                <hr>
+                <div class="order_payment">
+                    <div class="d-flex">
+                        <span>
+                            <i class="fa-solid fa-money-bill"></i>
+                            Payment method
+                        </span>
+                        <div class="content">
+                            COD
+                        </div>
+                    </div>
+                    <div>
+                        <div style="float: right;">
+                            Order Total
+                        </div>
+                        <div class="total_price">
+                            {{format_price total_selling}}
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="order_action">
+                    <div class="created_at">
+                        <i class="fa-regular fa-clock mr-2" style="color:#3DCBE9"></i> Created at
+                        <div class="ml-4">{{formatDate created_at 'DD/MM/YYYY'}}</div>
+                    </div>
+                    <div>
+                        <a name="" id="" class="btn btn-primary action_white" href="#" role="button">
+                            To rate
+                        </a>
+                        <a name="" id="" class="btn btn-primary action_green" href="#" role="button">
+                            Buy again
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            {{/each}}
+        </div>
+    </div>
+</div>

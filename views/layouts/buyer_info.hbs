@@ -15,6 +15,7 @@
 
     {{{_sections.css}}}
     <link rel="stylesheet" href="/public/css/global.css">
+    <link rel="stylesheet" href="/public/css/buyer_info.css">
 </head>
 
 <body>
@@ -34,27 +35,35 @@
                     </a>
                 </div>
             </div>
-            <div class="header__navbar ">
-                <div class="logoPic">
-                    <img src="/public/images/LogoHea.png" alt="" width="50%">
-                </div>
-                <div class="header__navbar-item header__search-bar">
-                    <span class="">
-                        <i class="bi bi-search spanSearchIcon"></i>
-                    </span>
-                    <input id="txtSearchText" type="text" placeholder="Input product name ...">
-                    <button class="can-hover btnSearch">
-                        Search
-                    </button>
-                </div>
-                <div class="header__navbar-item header__cart can-hover">
-                    <button>
-                        <img src="/public/images/icons8-cart-24 (2).png" alt=""> Cart
-                    </button>
+            <form id="frmSearch" action="/product/list/byName" method="post">
 
+                <div class="header__navbar container">
+                    <div class="logoPic" style="width: 120px; margin-right: 32px;">
+                        <a href="/">
+                            <img src="/public/images/LogoHea.png" alt="" style="width: 100%;">
+                        </a>
+                    </div>
+                    <div class="header__navbar-item header__search-bar">
+                        <span class="">
+                            <i class="bi bi-search spanSearchIcon mr-3"></i>
+                        </span>
+                        <input id="txtSearchText" type="text" placeholder="Input product name ..." name="text">
+                        <button class="can-hover btnSearch">
+                            <a href="javascript: $('#frmSearch').submit()" style="text-decoration: none; color: black;">
+                                Search
+                            </a>
+                        </button>
+                    </div>
+                    <div class="header__navbar-item header__cart can-hover">
+                        <button type="button">
+                            <a href="/cart" style="text-decoration: none; color: #fff;">
+                                <img src="/public/images/icons8-cart-24 (2).png" alt=""> Cart
+                            </a>
+                        </button>
+                    </div>
                 </div>
-            </div>
-            <div class="supportive_info_container d-flex">
+            </form>
+            <div class="supportive_info_container d-flex container">
                 <div class="supportive_infor">
                     <img src="/public/images/icons8-product-24.png" alt="">
                     100% original products
@@ -72,31 +81,90 @@
     </div>
 
     <div id="content">
-        <div class="container">
+        {{!-- <div class="container">
             <div class="row mt-3">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb" style="background-color: transparent; font-size: 20px;">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item"><a href="#">Fruit</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Da Lat Strawberry</li>
+                        <li class="breadcrumb-item"><a href="/">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Account</li>
                     </ol>
                 </nav>
             </div>
-        </div>
-        <div class="container">
+        </div> --}}
+        <div class="container mt-4">
             <div class="row">
-                <div class="col-3">
+                <div class="col-3 sidebar" style="">
                     <div class="shop_info">
-                        <img src="/public/images/product.png"
+                        <img src="/public/images/products/nhoDaLat.png"
                             class="img-fluid ${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|}"
                             alt="">
-                        <div>
-                            <span>Lavender</span>
-                            <a name="" id="" class="d-flex btn btn-primary" href="#" role="button">
-                                Edit
-                                <i class="bi bi-pencil"></i>
+                        <div class="ml-3">
+                            <span class="row">
+                                <div class="col">
+                                    Lavender
+                                </div>
+                            </span>
+                            <a class="row" href="">
+                                <div class="col">
+                                    Edit
+                                    <i class="bi bi-pencil"></i>
+                                </div>
                             </a>
                         </div>
+                    </div>
+                    <hr>
+                    <div class="card mt-3 navigation">
+                        <div class="card-header">
+                            <i class="bi bi-person-fill mr-2"></i>
+                            My Account
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item ml-4 ">
+                                <a href="/buyer_info" class="is_choosen">
+                                    My profile
+                                </a>
+                            </li>
+                            <li class="list-group-item ml-4">
+                                <a href="#">
+                                    Change pass
+                                </a>
+                            </li>
+                            <li class="list-group-item ml-4">
+                                <a href="#">
+                                    Addresses
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="card mt-3 navigation">
+                        <div class="card-header " >
+                            <a href="/buyer_info/order?status_id=0" class="is_choosen">
+                                <i class="bi bi-border-style mr-2"></i>
+                                My purchase
+                            </a>
+                        </div>
+                        {{!-- <ul class="list-group list-group-flush">
+                            <li class="list-group-item ml-4">
+                                <a href="/buyer_info/order?status_id=1">
+                                    To Ship
+                                </a>
+                            </li>
+                            <li class="list-group-item ml-4">
+                                <a href="/buyer_info/order?status_id=2">
+                                    Completed
+                                </a>
+                            </li>
+                            <li class="list-group-item ml-4">
+                                <a href="/buyer_info/order?status_id=3">
+                                    Cancelled
+                                </a>
+                            </li>
+                            <li class="list-group-item ml-4">
+                                <a href="/buyer_info/order?status_id=4">
+                                    Returned
+                                </a>
+                            </li>
+                        </ul> --}}
                     </div>
                 </div>
                 <div class="col-9">
@@ -110,17 +178,17 @@
         <hr class="customSeparateLine">
         <div class="container-fluid">
             <div class="row logoFooter">
-                <a href="" class="">
+                <a href="" class="col-3">
                     <img src="/public/images/LogoHea.png" alt="" width="70%">
                 </a>
-                <div class="">
+                <div class="col-9">
                     <div class="footer__title-list row">
-                        <div class="col">About us</div>
-                        <div class="col title_policyInfo">Policy</div>
-                        <div class="col title_contactInfo">Contact</div>
+                        <div class="col-4">About us</div>
+                        <div class="col-4 title_policyInfo">Policy</div>
+                        <div class="col-4 title_contactInfo">Contact</div>
                     </div>
                     <div class="row">
-                        <div class="storeInfor col">
+                        <div class="storeInfor col-4">
                             <ul>
                                 <li>
                                     <a href="">Introduction about the store</a>
@@ -133,7 +201,7 @@
                                 </li>
                             </ul>
                         </div>
-                        <div class="policyInfor col">
+                        <div class="policyInfor col-4">
                             <ul class="ul_policyInfo">
                                 <li>
                                     <a href="">Delivery Policy</a>
@@ -146,7 +214,7 @@
                                 </li>
                             </ul>
                         </div>
-                        <div class="contactInfor col">
+                        <div class="contactInfor col-4">
                             <ul>
                                 <li>
                                     Hotline:
@@ -171,8 +239,9 @@
         </div>
     </div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     {{{_sections.js}}}
 </body>
 

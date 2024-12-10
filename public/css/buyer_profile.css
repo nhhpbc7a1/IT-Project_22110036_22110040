@@ -1,0 +1,59 @@
+.my_card_info {
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 18px 24px;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.my_head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.my_card_info .title {
+    color:blue;
+}
+
+.my_card_info .lorem {
+    font-size: 14px;
+    color: rgba(0, 0, 255, 0.72);
+}
+
+.my_mid .input_list {
+    list-style: none;
+}
+
+.my_mid .input_item {
+    margin-bottom: 20px;
+    display: flex;
+}
+
+.my_mid label{
+    width: 140px;
+}
+
+.my_mid input{
+    flex: 1;
+    border: none;
+    border-bottom: 2px solid #ccc;
+    padding: 0px 24px;
+}
+
+.my_bot {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 24px;
+}
+
+.my_bot button{
+    padding: 6px 64px;
+    color: #fff;
+    background-color: var(--primary-color--medium);
+    border-radius: 5px;
+    border: none;
+    font-weight: 500;
+}

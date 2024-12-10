@@ -1,4 +1,6 @@
+USE FoodStore;
 -- Xóa các bảng theo thứ tự, bắt đầu từ các bảng có khóa ngoại
+
 DROP TABLE IF EXISTS order_status_updates;
 DROP TABLE IF EXISTS order_items;
 DROP TABLE IF EXISTS orders;

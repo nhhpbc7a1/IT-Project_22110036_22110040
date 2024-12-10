@@ -26,7 +26,7 @@
                         <img src="/public/images/icons8-seller-64.png" alt="">
                         Seller page</a>
                     <a class="can-hover btnSignIn " href="">
-                        <img src="/public/images/icons-signin.png" alt="" class="" >
+                        <img src="/public/images/icons-signin.png" alt="" class="">
                         Sign in</a>
                     <a class="can-hover btnSignup">
                         <img src="/public/images/icons8-signup.png" alt="" class="">
@@ -34,36 +34,47 @@
                     </a>
                 </div>
             </div>
-            <div class="header__navbar ">
-                <div class="logoPic">
-                    <img src="/public/images/LogoHea.png" alt="" width="50%">
+            <form id="frmSearch" action="/product/list/byName" method="post">
+
+                <div class="header__navbar container">
+                    <div class="logoPic" style="width: 120px; margin-right: 32px;">
+                        <a href="/">
+                            <img src="/public/images/LogoHea.png" alt="" style="width: 100%;">
+                        </a>
+                    </div>
+                    <div class="header__navbar-item header__search-bar">
+                        <span class="">
+                            <i class="bi bi-search spanSearchIcon mr-3"></i>
+                        </span>
+                        <input id="txtSearchText" type="text" placeholder="Input product name ..." name="text">
+                        <button class="can-hover btnSearch">
+                            <a href="javascript: $('#frmSearch').submit()" style="text-decoration: none; color: black;">
+                                Search
+                            </a>
+                        </button>
+                    </div>
+                    <div class="header__navbar-item header__cart can-hover">
+                        <button type="button">
+                            <a href="/cart" style="text-decoration: none; color: #fff;">
+                                <img src="/public/images/icons8-cart-24 (2).png" alt=""> Cart
+                            </a>
+                        </button>
+                    </div>
                 </div>
-                <div class="header__navbar-item header__search-bar">
-                    <span class="">
-                        <i class="bi bi-search spanSearchIcon" ></i>
-                    </span>
-                    <input id="txtSearchText" type="text" placeholder="Input product name ...">
-                    <button class="can-hover btnSearch">
-                        Search
-                    </button>
-                </div>
-                <div class="header__navbar-item header__cart can-hover">
-                    <button>
-                        <img src="/public/images/icons8-cart-24 (2).png" alt=""> Cart
-                    </button>
-                   
-                </div>
-            </div>
-            <div class="supportive_info_container d-flex">
+            </form>
+            <div class="supportive_info_container d-flex container">
                 <div class="supportive_infor">
                     <img src="/public/images/icons8-product-24.png" alt="">
-                    100% original products</div>
+                    100% original products
+                </div>
                 <div class="supportive_infor">
                     <img src="/public/images/icons8-in-transit-24.png" alt="">
-                    Free shipping at HCM city</div>
+                    Free shipping at HCM city
+                </div>
                 <div class="supportive_infor">
                     <img src="/public/images/icons8-money-24.png" alt="">
-                    Return within 15 days</div>
+                    Return within 15 days
+                </div>
             </div>
         </div>
     </div>
@@ -76,17 +87,17 @@
         <hr class="customSeparateLine">
         <div class="container-fluid">
             <div class="row logoFooter">
-                <a href="" class="">
-                    <img src="/public/images/LogoHea.png" alt="" width="70%" >
+                <a href="" class="col-3">
+                    <img src="/public/images/LogoHea.png" alt="" width="70%">
                 </a>
-                <div class="">
-                    <div class="footer__title-list row" >
-                        <div class="col">About us</div>
-                        <div class="col title_policyInfo">Policy</div>
-                        <div class="col title_contactInfo">Contact</div>
+                <div class="col-9">
+                    <div class="footer__title-list row">
+                        <div class="col-4">About us</div>
+                        <div class="col-4 title_policyInfo">Policy</div>
+                        <div class="col-4 title_contactInfo">Contact</div>
                     </div>
                     <div class="row">
-                        <div class="storeInfor col">
+                        <div class="storeInfor col-4">
                             <ul>
                                 <li>
                                     <a href="">Introduction about the store</a>
@@ -99,7 +110,7 @@
                                 </li>
                             </ul>
                         </div>
-                        <div class="policyInfor col" >
+                        <div class="policyInfor col-4">
                             <ul class="ul_policyInfo">
                                 <li>
                                     <a href="">Delivery Policy</a>
@@ -112,7 +123,7 @@
                                 </li>
                             </ul>
                         </div>
-                        <div class="contactInfor col">
+                        <div class="contactInfor col-4">
                             <ul>
                                 <li>
                                     Hotline:
@@ -137,8 +148,92 @@
         </div>
     </div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        document.querySelectorAll('.btn-add').forEach(button => {
+            button.addEventListener('click', function () {
+                const formId = this.getAttribute('data-form-id');
+                const form = document.getElementById(formId);
 
+                // Kiểm tra xem form có tồn tại không
+                if (!form) {
+                    console.error('Form không tìm thấy:', formId);
+                    return;
+                }
+
+                // Lấy dữ liệu từ form
+                const formData = new FormData(form);
+
+                // Chuyển đổi FormData thành đối tượng JavaScript
+                const formObject = {};
+                formData.forEach((value, key) => {
+                    formObject[key] = value;
+                });
+
+                console.log(JSON.stringify(formObject));
+
+                // Gửi dữ liệu qua fetch với JSON
+                fetch(form.action, {
+                    method: form.method,
+                    body: JSON.stringify(formObject),  // Chuyển đối tượng thành chuỗi JSON
+                    headers: {
+                        'Content-Type': 'application/json'  // Đảm bảo gửi dưới dạng JSON
+                    }
+                })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error(`Lỗi HTTP! Mã trạng thái: ${response.status}`);
+                        }
+                        return response.json();  // Chuyển đổi phản hồi thành JSON
+                    })
+                    .then(data => {
+                        console.log(data);  // Kiểm tra dữ liệu trả về từ server
+                        if (data.success) {
+                            // Hiển thị thông báo thành công
+                            Swal.fire({
+                                title: 'Thành công!',
+                                text: data.message,
+                                icon: 'success',
+                                confirmButtonText: 'OK'
+                            });
+
+                            // Cập nhật giỏ hàng với số lượng items và tổng tiền
+                            if (document.getElementById('totalItems')) {
+                                document.getElementById('totalItems').textContent = data.totalItems;
+                            }
+                            if (document.getElementById('cartTotal')) {
+                                document.getElementById('cartTotal').textContent = formatPrice(data.cartTotal);
+                            }
+                        } else {
+                            // Hiển thị thông báo lỗi nếu không thành công
+                            Swal.fire({
+                                title: 'Lỗi!',
+                                text: data.message,
+                                icon: 'error',
+                                confirmButtonText: 'OK'
+                            });
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Lỗi khi lấy dữ liệu:', error);
+                        Swal.fire({
+                            title: 'Lỗi!',
+                            text: 'Có lỗi xảy ra khi thêm sản phẩm vào giỏ hàng.',
+                            icon: 'error',
+                            confirmButtonText: 'OK'
+                        });
+                    });
+            });
+        });
+
+        // Hàm định dạng giá tiền
+        function formatPrice(price) {
+            return numeral(price).format('0,0') + ' VNĐ';  // Định dạng theo kiểu số VNĐ
+        }
+
+    </script>
     {{{_sections.js}}}
 </body>
 
