@@ -38,14 +38,13 @@
 .main__information{
     display: flex;
     justify-content: flex-end;
-    margin-right: 100px;
 }
 .header__navbar {
     display: flex;
     /* justify-content: space-between; */
     /* margin-left: 300px; */
     align-items: center;
-    padding-top: 20px;
+    padding-top: 5px;
 }
 
 
@@ -114,9 +113,10 @@
 .supportive_info_container{
     display: flex;
     justify-content: center;
-    padding: 10px 0px;
+    padding: 5px 0px;
     /* padding-top: 30px; */
     /* margin-left: 290px; */
+    font-size: 12px;
 }
 
 .supportive_info_container div{
@@ -125,6 +125,7 @@
 }
 .supportive_infor img{
     width: 20px;
+    margin-right: 12px;
 }
 .customSeparateLine{
     width: 70%;
@@ -322,7 +323,7 @@
 }
 
 .suggest_block_item .price_old {
-    font-size: 16px;
+    font-size: 14px;
     line-height: 30px;
     text-decoration:line-through;
     margin-left: 5px;
@@ -346,4 +347,10 @@
 .suggest_block_item--discount .suggest_item_discount,
 .suggest_block_item--discount .price_old {
     display: block;
+}
+
+.auth_row {
+    display: flex;
+    justify-content: end;
+    align-items: center;
 }

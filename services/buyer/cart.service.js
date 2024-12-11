@@ -33,5 +33,8 @@ export default {
         return db('cart')
            .where('cart_id', CartItem.cart_id)
            .update(CartItem);
+    },
+    del_by_cart_id(cart_id) {
+        return db('cart').where('cart_id', cart_id).del();
     }
 }

@@ -1,5 +1,7 @@
 {{#section 'css'}}
 <link rel="stylesheet" href="/public/css/order_list.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 {{/section}}
 
 {{#section 'js'}}
@@ -10,7 +12,7 @@
     <div class="row status_block">
         <div class="col-2">
             <a class="status_button {{#ifEquals 0 status_id}} is_active {{/ifEquals}}"
-            href="/buyer_info/order?status_id=0">
+                href="/buyer_info/order?status_id=0">
                 All
             </a>
         </div>
@@ -22,25 +24,25 @@
         </div>
         <div class="col-2">
             <a class="status_button {{#ifEquals 2 status_id}} is_active {{/ifEquals}}"
-            href="/buyer_info/order?status_id=2">
+                href="/buyer_info/order?status_id=2">
                 Verified
             </a>
         </div>
         <div class="col-2">
             <a class="status_button {{#ifEquals 3 status_id}} is_active {{/ifEquals}}"
-            href="/buyer_info/order?status_id=3">
+                href="/buyer_info/order?status_id=3">
                 On delivery
             </a>
         </div>
         <div class="col-2">
             <a class="status_button {{#ifEquals 4 status_id}} is_active {{/ifEquals}}"
-            href="/buyer_info/order?status_id=4">
+                href="/buyer_info/order?status_id=4">
                 Completed
             </a>
         </div>
         <div class="col-2">
             <a class="status_button {{#ifEquals 5 status_id}} is_active {{/ifEquals}}"
-            href="/buyer_info/order?status_id=5">
+                href="/buyer_info/order?status_id=5">
                 Cancelled
             </a>
         </div>
@@ -54,9 +56,15 @@
             <div class="order_block mt-3">
                 <div class="order_header">
                     <div class="order_id">#{{order_id}}</div>
-                    <div class="order_status">
-                        <span class="status_text">{{status_name}}</span>
-                        <i class="status_icon bi bi-check-circle-fill"></i>
+                    <div class="btn" style="--color: {{color}};
+                            border: none;
+                            background-color: transparent !important;
+                            color: var(--color);
+                            border: 1px solid var(--color);
+                            font-weight: 500;
+                        ;">
+                        {{status_name}}
+                        {{{icon}}}
                     </div>
                 </div>
                 <hr>

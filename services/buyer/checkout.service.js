@@ -68,5 +68,10 @@ export default {
             }
             await db('order_items').insert(order_item);
         }
+
+        return new_id;
+    },
+    add_order_status_update(entity) {
+        return db('order_status_updates').insert(entity);
     }
 }

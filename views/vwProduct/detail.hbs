@@ -27,7 +27,8 @@
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb" style="background-color: transparent; font-size: 20px;">
                 <li class="breadcrumb-item"><a href="/">Home</a></li>
-                <li class="breadcrumb-item"><a href="/product/list/byCat?id={{product.category_id}}">{{product.category_name}}</a></li>
+                <li class="breadcrumb-item"><a
+                        href="/product/list/byCat?id={{product.category_id}}">{{product.category_name}}</a></li>
                 <li class="breadcrumb-item active" aria-current="page" style="color: rgb(46, 45, 45);">{{product.name}}
                 </li>
             </ol>
@@ -54,9 +55,7 @@
                 </div>
                 <div class="info_block">
                     <div class="abstract">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia expedita adipisci soluta sint,
-                        in nisi deleniti, reiciendis fugit laudantium deserunt distinctio voluptatem labore eos nesciunt
-                        ratione alias earum id fuga.
+                        {{product.description}}
                     </div>
                 </div>
 
@@ -68,20 +67,11 @@
                         </div>
                         <div class="info_block">
                             <p>Origin</p>
-                            <div class="info_block_value ">Empty</div>
+                            <div class="info_block_value ">{{product.origin}}</div>
                         </div>
 
                         <div class="info_block">
                             <p>Quantity</p>
-                            {{!-- <div class="info_block_value quantity_block d-flex">
-                                <button id="btnMinus">
-                                    <i class="bi bi-dash"></i>
-                                </button>
-                                <input id="txtCount" type="text" value="1" readonly>
-                                <button id="btnPlus">
-                                    <i class="bi bi-plus"></i>
-                                </button>
-                            </div> --}}
                             <div class="info_block_value quantity_block">
                                 <button class="can-hover" id="btnMinus">
                                     <i class="bi bi-dash"></i>
@@ -96,8 +86,16 @@
                     </div>
                     <div class="col-6">
                         <div class="action_block">
-                            <button class="add_to_cart">Add to cart</button>
-                            <button class="buy_now ml-3">Buy now</button>
+                            <form action="/cart/add" id="addToCartForm_{{product.product_id}}" method="post"
+                                style="display: none;">
+                                <input type="hidden" name="product_id" value="{{product.product_id}}">
+                            </form>
+
+                            <button class="btn-add add_to_cart  can-hover"
+                                data-form-id="addToCartForm_{{product.product_id}}">Add to cart</button>
+                            <button class="btn-add buy_now ml-3  can-hover"
+                                data-form-id="addToCartForm_{{product.product_id}}">
+                                Buy now</button>
                         </div>
                     </div>
                 </div>
@@ -120,7 +118,9 @@
             <h3>Detail Description</h3>
             <p class="col-9">
                 {{product.description}}
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ipsa repellat sit voluptates repudiandae iusto ad maiores optio quam voluptatum totam. Odit dignissimos magnam eum nostrum at, alias temporibus dicta culpa.
+                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ipsa repellat sit voluptates repudiandae iusto
+                ad maiores optio quam voluptatum totam. Odit dignissimos magnam eum nostrum at, alias temporibus dicta
+                culpa.
             </p>
         </div>
     </div>

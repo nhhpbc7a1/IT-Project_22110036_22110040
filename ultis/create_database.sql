@@ -43,6 +43,7 @@ CREATE TABLE products (
     selling_price DECIMAL(10, 2) NOT NULL,          -- Giá bán
     old_price DECIMAL(10, 2) DEFAULT 0,          -- Giá cũ
     discount_percents DECIMAL(10, 2) DEFAULT 0, -- tỉ lệ giảm giá 
+    origin VARCHAR(255),
     image_url VARCHAR(255),
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (category_id) REFERENCES categories(category_id)
@@ -50,7 +51,9 @@ CREATE TABLE products (
 
 CREATE TABLE status (
     status_id INT AUTO_INCREMENT PRIMARY KEY,
-    status_name VARCHAR(20)
+    status_name VARCHAR(20),
+    icon VARCHAR(255),
+    color VARCHAR(20)
 );
 
 CREATE TABLE orders (
@@ -89,6 +92,8 @@ CREATE TABLE order_status_updates (
     order_id INT NOT NULL,                    -- Mã đơn hàng (liên kết với bảng orders)
     status_id INT NOT NULL,                   -- Trạng thái mới
     updated_at DATETIME DEFAULT CURRENT_TIMESTAMP, -- Thời gian cập nhật
+    title VARCHAR(255) NOT NULL,
+    reason VARCHAR(255) NOT NULL,
     FOREIGN KEY (order_id) REFERENCES orders(order_id),
     FOREIGN KEY (status_id) REFERENCES status(status_id)
 );

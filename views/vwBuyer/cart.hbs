@@ -220,7 +220,11 @@
                     </td>
                     <td>
                         <button class="product_delete can-hover">
-                            <i class="bi bi-x"></i>
+                            <form id="frmDeleteCart_{{cart_id}}" action="/cart/delete?cart_id={{cart_id}}" method="post"></form>
+                            <a class="" href="javascript: $('#frmDeleteCart_{{cart_id}}').submit()">
+                                <i class="bi bi-x"></i>
+                            </a>
+
                         </button>
                     </td>
                 </tr>
