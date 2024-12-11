@@ -28,13 +28,13 @@ router.post('/patch', async function(req, res) {
         }
         await buyer_infoService.updateUsername(user_id, req.body.username);
         await buyer_infoService.patch(user_id, userInfo);
-        res.json({ success: true, message: 'Update profile successfully' });
+        // res.json({ success: true, message: 'Update profile successfully' });
     }
     catch (error) {
         console.error(error);
-        res.status(500).json({ success: false, message: 'Error to update profile' });
+        // res.status(500).json({ success: false, message: 'Error to update profile' });
     }
-    // res.redirect('/buyer_info');
+    res.redirect('/buyer_info');
 });
 
 router.get('/order', async function(req, res) {

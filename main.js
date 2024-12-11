@@ -5,6 +5,8 @@ import hbs_sections from 'express-handlebars-sections';
 import cookieParser from 'cookie-parser';
 import session from 'express-session';
 import moment from 'moment';
+import check from './middlewares/auth.route.js'
+import {authAdmin} from './middlewares/auth.route.js';
 
 import categoryService from './services/category.service.js';
 const app = express();
@@ -62,11 +64,8 @@ app.use(async function (req, res, next) {
     if (!req.session.auth) {
         req.session.auth = false;
     }
-    // res.locals.auth = req.session.auth;
-    // res.locals.authUser = req.session.authAccount;
-
-    req.session.user_id = 1;
-
+    res.locals.auth = req.session.auth;
+    res.locals.authAccount = req.session.authAccount;
     next();
 });
 
@@ -98,16 +97,16 @@ import accountRouter from './routes/account.route.js';
 app.use('/account', accountRouter);
 
 import cartRouter from './routes/cart.route.js';
-app.use('/cart', cartRouter);
+app.use('/cart',check, cartRouter);
 
 import checkoutRouter from './routes/checkout.route.js';
-app.use('/checkout', checkoutRouter);
+app.use('/checkout',check, checkoutRouter);
 
 import buyer_infoRouter from './routes/buyer_info.route.js';
-app.use('/buyer_info', buyer_infoRouter);
+app.use('/buyer_info',check, buyer_infoRouter);
 
 import adminRouter from './routes/admin.route.js';
-app.use('/admin', adminRouter);
+app.use('/admin', authAdmin, adminRouter);
 
 
 app.listen(3000, function () {

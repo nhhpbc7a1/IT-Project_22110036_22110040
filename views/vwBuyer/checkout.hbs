@@ -25,8 +25,8 @@
                 } else {
                     formObject[key] = value;
                 }
-            }); 
-            
+            });
+
             console.log(formObject);
 
             Swal.fire({
@@ -144,8 +144,9 @@
                     {{#each checkout_list}}
                     <input type="hidden" name="cart_id_list" value="{{cart_id}}">
                     <tr>
-                        <td width="200px">
-                            <img src="{{image_url}}" alt="" width="150px">
+                        <td width="120px" height="120px">
+                            <img src="{{image_url}}" class="img-thumbnail" alt="..."
+                                style="width: 100px; height: 100px;">
                         </td>
                         <td width="150px">
                             <div class="product_name">{{name}}</div>
@@ -171,7 +172,8 @@
                                 <i class="fa-solid fa-truck mr-3"></i>
                                 <div class="">
                                     Deliver method
-                                    <p style="color: black; font-size: 12px; font-weight:400;">We guarantee that you will get your order within 7 days</p>
+                                    <p style="color: black; font-size: 12px; font-weight:400;">We guarantee that you
+                                        will get your order within 7 days</p>
                                 </div>
 
                             </div>
