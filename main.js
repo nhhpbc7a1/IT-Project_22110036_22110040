@@ -23,11 +23,18 @@ app.engine('hbs', engine({
         format_price(value) {
             return numeral(value).format('0,000') + ' VNĐ';
         },
+        format_round(value) {
+            return numeral(value).format('0,000');
+        },
+
         json(context) {
             return JSON.stringify(context);
         },
         ifEquals(arg1, arg2, options) {
             return arg1 == arg2 ? options.fn(this) : options.inverse(this);
+        },
+        ifNotEquals(arg1, arg2, options) {
+            return arg1 != arg2 ? options.fn(this) : options.inverse(this);
         },
         eq(arg1, arg2) {
             return arg1 === arg2; // Trả về true nếu 2 giá trị bằng nhau
@@ -40,7 +47,7 @@ app.engine('hbs', engine({
             return false;
         },
         formatDate(date, format) {
-            return moment(date).format(format);  // Định dạng ngày theo format
+            return moment(date).format('MMMM DD, YYYY, hh:mm a');  // Định dạng ngày theo format
         }
     }
 }));
@@ -66,6 +73,7 @@ app.use(async function (req, res, next) {
     }
     res.locals.auth = req.session.auth;
     res.locals.authAccount = req.session.authAccount;
+    res.locals.cartCount = req.session.cartCount;
     next();
 });
 

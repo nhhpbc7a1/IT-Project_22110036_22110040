@@ -43,88 +43,14 @@
             <div class="row suggest_block_list">
                 {{#each suggest_products}}
                 <div class="col-3">
-                    <div class="suggest_block_item suggest_block_item--discount">
+                    <div class="suggest_block_item
+                        {{#ifNotEquals old_price 0}}suggest_block_item--discount{{/ifNotEquals}}
+                        ">
                         <img src="{{image_url}}" alt="">
                         <h5 class="mt-2 mb-3">{{name}}</h5>
                         <div class="row">
                             <p class="price">{{format_price selling_price}}</p>
-                            <p class="price_old">60.000đ</p>
-                        </div>
-                        <div class="row">
-                            <form action="/cart/add" id="addToCartForm_{{this.product_id}}" method="post"
-                                style="display: none;">
-                                <input type="hidden" name="product_id" value="{{this.product_id}}">
-                            </form>
-
-                            <button type="button" class="btn-add btnAddToCart can-hover mr-3"
-                                data-form-id="addToCartForm_{{this.product_id}}">
-                                <img src="/public/images/icons8-cart-24 (2).png" alt="" id="imgCart">
-                            </button>
-                            <button type="button" class="btnViewDetail can-hover">
-                                <a href="/product/detail?id={{product_id}}"
-                                    style="text-decoration: none;color: #37A058;">
-                                    View detail
-                                </a>
-                            </button>
-                        </div>
-                        <div class="suggest_item_discount">20%</div>
-                    </div>
-                </div>
-
-                {{/each}}
-            </div>
-        </div>
-        <div class="container suggest_block">
-            <div class="row suggest_block_header">
-                Best Seller
-            </div>
-            <div class="row suggest_block_list">
-                {{#each best_seller_products}}
-                <div class="col-3">
-                    <div class="suggest_block_item suggest_block_item--discount">
-                        <img src="{{image_url}}" alt="">
-                        <h5 class="mt-2 mb-3">{{name}}</h5>
-                        <div class="row">
-                            <p class="price">{{format_price selling_price}}</p>
-                            <p class="price_old">60.000đ</p>
-                        </div>
-                        <div class="row">
-                            <form action="/cart/add" id="addToCartForm_{{this.product_id}}" method="post"
-                                style="display: none;">
-                                <input type="hidden" name="product_id" value="{{this.product_id}}">
-                            </form>
-
-                            <button type="button" class="btn-add btnAddToCart can-hover mr-3"
-                                data-form-id="addToCartForm_{{this.product_id}}">
-                                <img src="/public/images/icons8-cart-24 (2).png" alt="" id="imgCart">
-                            </button>
-                            <button type="button" class="btnViewDetail can-hover">
-                                <a href="/product/detail?id={{product_id}}"
-                                    style="text-decoration: none;color: #37A058;">
-                                    View detail
-                                </a>
-                            </button>
-                        </div>
-                        <div class="suggest_item_discount">20%</div>
-                    </div>
-                </div>
-
-                {{/each}}
-            </div>
-        </div>
-        <div class="container suggest_block">
-            <div class="row suggest_block_header">
-                New Arrival
-            </div>
-            <div class="row suggest_block_list">
-                {{#each new_arrival_products}}
-                <div class="col-3">
-                    <div class="suggest_block_item suggest_block_item--discount">
-                        <img src="{{image_url}}" alt="">
-                        <h5 class="mt-2 mb-3">{{name}}</h5>
-                        <div class="row">
-                            <p class="price">{{format_price selling_price}}</p>
-                            <p class="price_old">60.000đ</p>
+                            <p class="price_old">{{format_price old_price}}</p>
                         </div>
                         <div class="row">
                             <form action="/cart/add" id="addToCartForm_{{this.product_id}}" method="post"
@@ -143,7 +69,87 @@
                                 </a>
                             </button>
                         </div>
-                        <div class="suggest_item_discount">20%</div>
+                        <div class="suggest_item_discount">-{{format_round discount_percents}}%</div>
+                    </div>
+                </div>
+
+                {{/each}}
+            </div>
+        </div>
+        <div class="container suggest_block">
+            <div class="row suggest_block_header">
+                Best Seller
+            </div>
+            <div class="row suggest_block_list">
+                {{#each best_seller_products}}
+                <div class="col-3">
+                    <div class="suggest_block_item
+                        {{#ifNotEquals old_price 0}}suggest_block_item--discount{{/ifNotEquals}}
+                        ">
+                        <img src="{{image_url}}" alt="">
+                        <h5 class="mt-2 mb-3">{{name}}</h5>
+                        <div class="row">
+                            <p class="price">{{format_price selling_price}}</p>
+                            <p class="price_old">{{format_price old_price}}</p>
+                        </div>
+                        <div class="row">
+                            <form action="/cart/add" id="addToCartForm_{{this.product_id}}" method="post"
+                                style="display: none;">
+                                <input type="hidden" name="product_id" value="{{this.product_id}}">
+                            </form>
+
+                            <button type="button" class="btn-add btnAddToCart can-hover mr-3"
+                                data-form-id="addToCartForm_{{this.product_id}}">
+                                <img src="/public/images/icons8-cart-24 (2).png" alt="" id="imgCart">
+                            </button>
+                            <button type="button" class="btnViewDetail can-hover">
+                                <a href="/product/detail?id={{product_id}}"
+                                    style="text-decoration: none; color: #37A058;">
+                                    View detail
+                                </a>
+                            </button>
+                        </div>
+                        <div class="suggest_item_discount">-{{format_round discount_percents}}%</div>
+                    </div>
+                </div>
+
+                {{/each}}
+            </div>
+        </div>
+        <div class="container suggest_block">
+            <div class="row suggest_block_header">
+                New Arrival
+            </div>
+            <div class="row suggest_block_list">
+                {{#each new_arrival_products}}
+                <div class="col-3">
+                    <div class="suggest_block_item
+                        {{#ifNotEquals old_price 0}}suggest_block_item--discount{{/ifNotEquals}}
+                        ">
+                        <img src="{{image_url}}" alt="">
+                        <h5 class="mt-2 mb-3">{{name}}</h5>
+                        <div class="row">
+                            <p class="price">{{format_price selling_price}}</p>
+                            <p class="price_old">{{format_price old_price}}</p>
+                        </div>
+                        <div class="row">
+                            <form action="/cart/add" id="addToCartForm_{{this.product_id}}" method="post"
+                                style="display: none;">
+                                <input type="hidden" name="product_id" value="{{this.product_id}}">
+                            </form>
+
+                            <button type="button" class="btn-add btnAddToCart can-hover mr-3"
+                                data-form-id="addToCartForm_{{this.product_id}}">
+                                <img src="/public/images/icons8-cart-24 (2).png" alt="" id="imgCart">
+                            </button>
+                            <button type="button" class="btnViewDetail can-hover">
+                                <a href="/product/detail?id={{product_id}}"
+                                    style="text-decoration: none; color: #37A058;">
+                                    View detail
+                                </a>
+                            </button>
+                        </div>
+                        <div class="suggest_item_discount">-{{format_round discount_percents}}%</div>
                     </div>
                 </div>
 

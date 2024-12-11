@@ -12,12 +12,14 @@ router.post('/', async function (req, res) {
     const user_id = req.session.user_id;
     const userInfo = await checkoutService.getUserInfoByID(user_id);
 
-    const shipping_fee = 30;
+    let shipping_fee = 50000;
     let product_total = 0;
     for (let item of checkout_list) {
         item.item_total_price = item.selling_price * item.quantity;
         product_total += item.item_total_price;
     }
+    if (product_total > 300000) 
+        shipping_fee = 0;
     const total_price = shipping_fee + product_total;
 
     res.render('vwBuyer/checkout', {
@@ -35,7 +37,15 @@ router.post('/create_order', async function (req, res) {
     console.log(req.body);
     const user_id = req.session.user_id;
     try {
-        await checkoutService.createOrder(user_id, req.body);
+        const order_id = await checkoutService.createOrder(user_id, req.body);
+        const order_status_update = {
+            order_id: order_id,
+            status_id: 1, // 1: pending
+            updated_at: new Date(),
+            title: 'Order created',
+            reason: 'Waiting for shop to verify order'
+        }
+        await checkoutService.add_order_status_update(order_status_update);
         res.json({ success: true, message: 'Product added to cart successfully' });
     }
     catch (error) {

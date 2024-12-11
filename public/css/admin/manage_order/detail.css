@@ -1,0 +1,88 @@
+.status_update_block {
+    background-color: #fff;
+    box-shadow:  rgba(0, 0, 0, 0.05) 0px 2px 8px;
+    padding: 12px 24px;
+    margin-top: 40px;
+}
+
+.status_update_block .status_update_header{
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.status_update_block .status_update_item{
+    display: flex;
+    align-items: center;justify-content: space-between;
+}
+
+.status_update_block .line{
+    width: 60px;
+    text-align: center;
+    color: var(--primary-color--medium);
+    font-size: 20px;
+    margin-right: 12px;
+    z-index: 100;
+}
+
+.status_update_block i{
+    padding: 6px 10px;
+    border-radius: 100%;
+    background-color: #ddd;
+}
+
+.status_update_block .title{
+    font-weight: 500;
+}
+
+.status_update_block .reason{
+    color: #5D7186;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.status_update_block .date{
+    color: #5D7186;
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.status_update_list {
+    position: relative;
+}
+
+.status_update_list::before {
+    display: block;
+    content: "";
+    height: 100%;
+    width: 2px;
+    background-color: #ddd;
+    position: absolute;
+    left: 30px;
+
+    top: 10px;
+}
+
+.customer_detail {
+    padding: 16px 24px;
+    margin-left: 12px;
+    background-color: #fff;
+    box-shadow:  rgba(0, 0, 0, 0.05) 0px 2px 8px;
+}
+
+.customer_detail .title {
+    font-weight: 500;
+    font-size: 16px;
+}
+.customer_detail span {
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.customer_detail .text {
+    font-size: 14px;
+    font-family: 'Play', sans-serif;
+}
+
+.customer_info_item {
+    padding-bottom: 12px;
+}

@@ -1,0 +1,251 @@
+{{#section 'css'}}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<link rel="stylesheet" href="/public/css/global.css">
+<link rel="stylesheet" href="/public/css/order_list.css">
+
+<link rel="stylesheet" href="/public/css/admin/manage_order/detail.css">
+{{/section}}
+
+{{#section 'js'}}
+<script>
+    // Hàm gửi yêu cầu POST chung
+    function sendOrderRequest(orderId, status, reason = '') {
+        return fetch('/admin/order/' + (status === 'confirmed' ? 'confirm_order' : 'cancel_order'), {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                order_id: orderId,
+                status: status,
+                reason: reason,
+            }),
+        })
+            .then(response => {
+                console.log('Response:', response); // Log toàn bộ phản hồi
+                return response.json();
+            })
+            .then(data => {
+                if (data.success) {
+                    const message = status === 'confirmed' ? 'Order confirmed!' : 'Order canceled';
+                    const icon = status === 'confirmed' ? 'success' : 'info';
+                    Swal.fire(message, `Your order has been ${status === 'confirmed' ? 'successfully confirmed' : 'canceled'}.`, icon)
+                        .then(() => {
+                            // Reload lại trang hiện tại
+                            window.location.href = `/admin/order/detail?id=${orderId}`;
+                        });
+                } else {
+                    Swal.fire("Error", `There was an issue ${status === 'confirmed' ? 'confirming' : 'canceling'} your order.`, "error");
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                Swal.fire("Error", "Something went wrong, please try again later.", "error");
+            });
+    }
+
+    // Lắng nghe sự kiện click trên nút Xác nhận đơn
+    document.querySelector('.nextStatus').addEventListener('click', function () {
+        Swal.fire({
+            title: "Update order status?",
+            showCancelButton: true,
+            confirmButtonText: "Confirm",
+            icon: 'info'
+        }).then((result) => {
+            const orderId = {{ order.order_id }};
+        if (isNaN(orderId)) {
+            throw new Error('Invalid order_id');
+        }
+
+        if (result.isConfirmed) {
+            // Gửi yêu cầu xác nhận đơn hàng
+            sendOrderRequest(orderId, 'confirmed');
+        }
+    });
+    });
+    document.querySelector('.cancelOrder').addEventListener('click', function () {
+        const orderId = {{ order.order_id }};
+
+    Swal.fire({
+        title: 'Provide Cancel Reason',
+        input: 'textarea',
+        inputPlaceholder: 'Enter your reason here...',
+        showCancelButton: true,
+        confirmButtonText: 'Submit',
+        cancelButtonText: 'Cancel',
+        preConfirm: (reason) => {
+            if (!reason) {
+                Swal.showValidationMessage('You need to provide a reason!');
+                return false;
+            }
+            // Gửi yêu cầu hủy đơn hàng với lý do
+            return sendOrderRequest(orderId, 'canceled', reason);
+        }
+    });
+    });
+
+</script>
+{{/section}}
+
+<div class="container">
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-9" style="padding: 0;">
+            <div class="order_block mt-3">
+                <div class="order_header">
+                    <div class="order_id">#{{order.order_id}}</div>
+                    <div class="btn" style="--color: {{order.color}};
+                            border: none;
+                            background-color: transparent !important;
+                            color: var(--color);
+                            border: 1px solid var(--color);
+                            font-weight: 500;
+                        ;">
+                        {{order.status_name}}
+                        {{{order.icon}}}
+                    </div>
+                </div>
+                <hr>
+                {{#each order.items}}
+                <div class="order_details">
+
+                    <div class="order_item">
+                        <div class="item_image">
+                            <img src="{{image_url}}" class="img-thumbnail" alt="..." style="width: 80px; height: 80px;">
+                        </div>
+                        <div class="item_details">
+                            <div class="item_name">{{name}}</div>
+                            <div class="item_quantity">x{{quantity}}</div>
+                        </div>
+                    </div>
+                    <div class="item_price">
+                        {{!-- <span class="old_price">1000</span> --}}
+                        <span class="selling_price">{{format_price price}}</span>
+                    </div>
+                </div>
+                <hr>
+                {{/each}}
+                <div class="order_delivery">
+                    <div class="d-flex">
+                        <span>
+                            <i class="fa-solid fa-truck"></i>
+                            Delivery method
+                        </span>
+                        <div class="content">
+                            Fast
+                        </div>
+                    </div>
+                    <div class="shipping_fee">{{format_price order.delivery_fee}}</div>
+                </div>
+                <hr>
+                <div class="order_payment">
+                    <div class="d-flex">
+                        <span>
+                            <i class="fa-solid fa-money-bill"></i>
+                            Payment method
+                        </span>
+                        <div class="content">
+                            COD
+                        </div>
+                    </div>
+                    <div>
+                        <div style="float: right;">
+                            Order Total
+                        </div>
+                        <div class="total_price">
+                            {{format_price order.total_selling}}
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="order_action">
+                    <div class="created_at">
+                        <i class="fa-regular fa-clock mr-2" style="color:#3DCBE9"></i> Created at
+                        <div class="ml-4">{{formatDate order.created_at 'DD/MM/YYYY'}}</div>
+                    </div>
+                    <div>
+                        <a name="" id="" class="cancelOrder btn btn-danger action_white" href="#" role="button">
+                            Cancel
+                        </a>
+                        <a name="" id="" class="nextStatus btn btn-primary action_green" href="#" role="button">
+                            Make As {{next_status.status_name}}
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="status_update_block">
+                <div class="status_update_header">
+                    <span>Order Timeline</span>
+                </div>
+                <hr>
+                <div class="status_update_list">
+                    {{#each order.order_status_update}}
+                    <div class="status_update_item mt-4">
+                        <div class="d-flex">
+                            <div class="line">
+                                <i class="bi bi-check-circle"></i>
+                            </div>
+                            <div class="status_content">
+                                <div class="title">{{title}}</div>
+                                <div class="reason">{{reason}}</div>
+                                <div class="btn" style="--color: {{color}};
+                                        border: none;
+                                        background-color: transparent !important;
+                                        color: var(--color);
+                                        border: 1px solid var(--color);
+                                        font-weight: 500;
+                                    ;">
+                                    {{status_name}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="date">{{formatDate updated_at 'MMMM DD, YYYY, hh:mm a'}}</div>
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+        <div class="col-3 mt-3">
+            <div class="customer_detail">
+                <div class="title">
+                    Customer Details
+                </div>
+                <hr>
+                <div class="customer_info">
+                    <div class="user_info ">
+                        <img src="/public/images/avatar.jpg" class="mb-3 img-thumbnail" alt="..."
+                            style="width: 40px; height: 40px;">
+                        <div>
+                            <div class="customer_info_item">
+                                <span>Username</span>
+                                <div class="text">{{user.username}}</div>
+                            </div>
+                            <div class="customer_info_item">
+                                <span>Email</span>
+                                <div class="text">{{user.email}}</div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="customer_info_item">
+                        <span>Full name</span>
+                        <div class="text">{{order.full_name}}</div>
+                    </div>
+                    <div class="customer_info_item">
+                        <span>Phone number</span>
+                        <div class="text">{{order.phone_number}}</div>
+                    </div>
+                    <div class="customer_info_item">
+                        <span>Address</span>
+                        <div class="text">{{order.address}}</div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>

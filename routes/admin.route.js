@@ -18,4 +18,8 @@ router.use('/product', manage_productRouter);
 import manage_categoryRouter from '../routes/admin/manage_category.route.js';
 router.use('/category', manage_categoryRouter);
 
+import manage_orderRouter from '../routes/admin/manage_order.route.js';
+router.use('/order', manage_orderRouter);
+
+
 export default router;

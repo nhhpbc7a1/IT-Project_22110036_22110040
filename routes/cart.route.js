@@ -13,6 +13,13 @@ router.get('/', check, async function (req, res) {
     });
 });
 
+router.post('/delete', check, async function (req, res) {
+    const cart_id = req.query.cart_id || 0;
+    await cartService.del_by_cart_id(cart_id);
+    res.redirect('/cart');
+});
+
+
 router.use(bodyParser.json());
 router.post('/add', async function (req, res) {
     const product_id = req.body.product_id; 

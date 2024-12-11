@@ -86,12 +86,14 @@
                 {{#each products}}
                 <div class="col-4">
                     {{!-- <div class="suggest_block_item suggest_block_item--discount"> --}}
-                        <div class="suggest_block_item">
+                        <div class="suggest_block_item
+                        {{#ifNotEquals old_price 0}}suggest_block_item--discount{{/ifNotEquals}}
+                        ">
                             <img src="{{image_url}}" alt="">
                             <h5 class="mt-2 mb-3">{{name}}</h5>
                             <div class="row">
                                 <p class="price">{{format_price selling_price}}</p>
-                                <p class="price_old">60.000đ</p>
+                                <p class="price_old">{{format_price old_price}}</p>
                             </div>
                             <div class="row">
                                 <form action="/cart/add" id="addToCartForm_{{product_id}}" method="post"
@@ -110,7 +112,7 @@
                                     </a>
                                 </button>
                             </div>
-                            <div class="suggest_item_discount">20%</div>
+                            <div class="suggest_item_discount">-{{format_round discount_percents}}%</div>
                         </div>
                     </div>
                     {{/each}}
