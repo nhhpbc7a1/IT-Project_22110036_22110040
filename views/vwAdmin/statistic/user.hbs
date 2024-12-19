@@ -1,0 +1,87 @@
+<div class="container-fluid">
+
+    <!-- DataTales Example -->
+    <div id="table-wrapper"></div>
+
+
+</div>
+
+{{#section 'css'}}
+<style>
+    .ellipsis {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 200px;
+        /* Giới hạn chiều rộng tối đa */
+    }
+</style>
+{{/section}}
+
+{{#section 'js'}}
+<script src="/node_modules/gridjs/dist/gridjs.umd.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
+<script>
+
+    function formatPrice(price) {
+        return numeral(price).format('0,000') + ' VNĐ';  // Định dạng theo kiểu số VNĐ
+    }
+
+    // Lấy dữ liệu từ this.product đã chuyển sang JSON
+    const productData = {{{ json this.statistic }}};
+
+    
+    // Chuyển đổi dữ liệu từ đối tượng thành mảng để sử dụng trong Grid.js
+    const data = productData.map(item => [item.user_id, item.full_name, item.email, item.count_ordered, item.count_item_ordered, item.total_selling]);
+
+    console.log(data);
+    // Khởi tạo bảng Grid.js
+    new gridjs.Grid({
+        columns: ["ID", "Tên", "Email", "Tổng đơn", "Tổng món",
+            {
+                name: "Tổng tiền",
+                formatter: (cell) => {
+                    const price = formatPrice(parseFloat(cell.toLocaleString()));
+                    return `${price}`
+                },
+                // Định dạng giá
+                sort: {
+                    compare: (a, b) => {
+                        if (parseFloat(a) > parseFloat(b)) {
+                            return 1;
+                        } else if (parseFloat(b) > parseFloat(a)) {
+                            return -1;
+                        } else {
+                            return 0;
+                        }
+                    },
+                },
+            },
+        ],
+        data: data,
+        pagination: {
+            limit: 5
+        },
+        search: true,
+        sort: true,
+        language: {
+            search: {
+                placeholder: 'Tìm kiếm...'
+            },
+            pagination: {
+                previous: 'Trước',
+                next: 'Sau',
+                showing: 'Hiển thị',
+                results: () => 'kết quả'
+            }
+        },
+        style: {
+            th: {
+                background: 'linear-gradient(180deg, #eee 100%, #eee 100%'
+            },
+
+        }
+    }).render(document.getElementById("table-wrapper"));
+
+</script>
+{{/section}}

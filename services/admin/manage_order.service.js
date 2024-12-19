@@ -53,7 +53,7 @@ export default {
     },
     async add_next_status(order_id) {
         const current_order = await this.findById(order_id);
-        if (current_order.status_id >= 3) {
+        if (current_order.status_id > 3) {
             throw new Error('This order has already done');
         }
         const next_status = await this.getStatusByID(current_order.status_id + 1);
@@ -74,7 +74,7 @@ export default {
 
     async cancelOrder(order_id, reason) {
         const current_order = await this.findById(order_id);
-        if (current_order.status_id >= 3) {
+        if (current_order.status_id > 3) {
             throw new Error('This order has already done');
         }
         const next_status = await this.getStatusByID(5); // status 5 is canceled

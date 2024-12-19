@@ -22,7 +22,7 @@ INSERT INTO categories (category_name) VALUES
 ('salty cake ');
 
 -- Insert data vào bảng products
-INSERT INTO products (name, category_id, quantity, description, cost_price, selling_price, image_url, origin, old_price, discount_percents) VALUES
+INSERT INTO products (name, category_id, quantity, description, selling_price, cost_price, image_url, origin, old_price, discount_percents) VALUES
 ('Avocado 1kg', 1, 100, 'Fresh avocado, perfect for smoothies and salads', 75000, 65000, '/public/images/products/bo.png', 'Vietnam', 0, 0),
 ('Pomegranate 1kg', 1, 50, 'Juicy pomegranate, rich in antioxidants', 70000, 60000, '/public/images/products/luu.png', 'Vietnam', 0, 0),
 ('Australian orange 1kg', 1, 120, 'Sweet Australian oranges, perfect for juice', 50000, 45000, '/public/images/products/camUc.png', 'Australia', 55000, 18),
@@ -91,20 +91,20 @@ INSERT INTO status (status_name, icon, color) VALUES
 ('Cancelled', '<i class="fas fa-times-circle"></i>', '#FF0000');
 
 -- Insert data vào bảng orders
-INSERT INTO orders (user_id, status_id, delivery_fee, items_price, total_cost, total_selling, address, phone_number, full_name) VALUES 
-(2, 1, 5.0, 20.0, 15.0, 25.0,'393 to 12 ap tan hau xa tan thuan tay', '0123165435','Nguyen Van A'),
-(2, 2, 4.0, 40.0, 30.0, 50.0,'1 Vo Van Ngan, Thu Duc, TPHCM', '09123435','Nguyen Van B');
+-- INSERT INTO orders (user_id, status_id, delivery_fee, items_price, total_cost, total_selling, address, phone_number, full_name) VALUES 
+-- (2, 1, 50000, 200000, 150000, 250000,'393 to 12 ap tan hau xa tan thuan tay', '0123165435','Nguyen Van A'),
+-- (2, 2, 40000, 400000, 300000, 500000,'1 Vo Van Ngan, Thu Duc, TPHCM', '09123435','Nguyen Van B');
 
 -- Insert data vào bảng order_items
-INSERT INTO order_items (order_id, product_id, quantity, price, message_for_cake) VALUES 
-(1, 1, 2, 1.5, 'No Ice'),
-(1, 2, 1, 2.0, 'Spicy'),
-(2, 3, 1, 15.0, 'Birthday Cake');
+-- INSERT INTO order_items (order_id, product_id, quantity, price, message_for_cake) VALUES 
+-- (1, 1, 2, 1.5, 'No Ice'),
+-- (1, 2, 1, 2.0, 'Spicy'),
+-- (2, 3, 1, 15.0, 'Birthday Cake');
 
 -- Insert data vào bảng order_status_updates
-INSERT INTO order_status_updates (order_id, status_id, updated_at) VALUES 
-(1, 1, '2024-12-06 10:00:00'),
-(2, 2, '2024-12-06 12:00:00');
+-- INSERT INTO order_status_updates (order_id, status_id, updated_at) VALUES 
+-- (1, 1, '2024-12-06 10:00:00'),
+-- (2, 2, '2024-12-06 12:00:00');
 
 -- Insert data vào bảng cart
 INSERT INTO cart (user_id, product_id, quantity) VALUES 

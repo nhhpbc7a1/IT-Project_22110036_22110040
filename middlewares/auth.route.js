@@ -1,14 +1,14 @@
 export default function (req, res, next) {
     if (req.session.auth === false) {
-      req.session.retUrl = req.originalUrl;  // Save the requested URL for later use.
-      return res.redirect('/account/login');
+      //req.session.retUrl = req.originalUrl;  // Save the requested URL for later use.
+      return res.redirect('/account/login'); 
     }
     next();      
 }
 
 export  function authAdmin(req, res, next) {
     if (req.session.auth === false) {
-        req.session.retUrl = req.originalUrl;  // Save the requested URL for later use.
+        //req.session.retUrl = req.originalUrl;  // Save the requested URL for later use.
         return res.redirect('/account/login');
     }
 
